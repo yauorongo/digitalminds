@@ -1,0 +1,14 @@
+{
+  "name": "digitalminds",
+  "version": "1.0.0",
+  "description": "DigitalMinds website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "shot": "node screenshot.mjs http://localhost:3000"
+  },
+  "dependencies": {
+    "puppeteer": "^25.2.1"
+  }
+}

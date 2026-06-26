@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Dev artifacts
+temporary screenshots/
+_candidates.html
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
