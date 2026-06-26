@@ -157,6 +157,7 @@ const head = (title, desc) => `<!DOCTYPE html>
   .course-card:hover{border-color:#004ac6;box-shadow:0 18px 40px -12px rgba(15,23,42,.12);transform:translateY(-4px);}
   .no-scrollbar::-webkit-scrollbar{display:none;}
   .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+  .bleed{width:80vw;margin-left:calc(50% - 40vw);margin-right:calc(50% - 40vw);}
   .blob-animate{animation:blob 18s infinite alternate cubic-bezier(.45,0,.55,1);}
   @keyframes blob{0%{transform:translate(0,0) scale(1) rotate(0)}100%{transform:translate(18px,-26px) scale(1.12) rotate(10deg)}}
   [data-rv]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
@@ -166,6 +167,7 @@ const head = (title, desc) => `<!DOCTYPE html>
 </style>
 </head>`;
 
+const compNav = data.map(c=>`<a href="/competences/${c.slug}" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">${c.title}</a>`).join('');
 const nav = `<header class="fixed top-0 w-full flex justify-between items-center px-4 md:px-10 py-4 bg-white/70 backdrop-blur-xl border-b border-surface-variant/50 z-50">
   <a href="/" class="flex items-center gap-2.5">
     <div class="w-10 h-10 bg-gradient-to-br from-secondary to-tertiary rounded-xl flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div>
@@ -173,7 +175,12 @@ const nav = `<header class="fixed top-0 w-full flex justify-between items-center
   </a>
   <nav class="hidden md:flex gap-8 items-center">
     <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="/">Accueil</a>
-    <a class="text-sm font-bold text-secondary" href="/competences">Les Compétences</a>
+    <div class="relative group">
+      <button class="text-sm font-bold text-secondary inline-flex items-center gap-1 cursor-pointer">Les Compétences <span class="material-symbols-outlined text-base transition-transform group-hover:rotate-180">expand_more</span></button>
+      <div class="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 focus-within:visible focus-within:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full pt-3 w-64 z-50">
+        <div class="bg-white rounded-2xl border border-surface-variant shadow-xl p-2 grid gap-0.5">${compNav}</div>
+      </div>
+    </div>
     <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="/membership">Devenir Membre</a>
     <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="/contact">Contact</a>
   </nav>
@@ -203,7 +210,7 @@ const footer = `<footer class="bg-surface-container-low border-t border-surface-
     <div>
       <h4 class="font-bold text-sm text-on-background mb-4">Entreprise</h4>
       <ul class="space-y-2.5 text-sm text-on-surface-variant">
-        <li><a href="/competences" class="hover:text-secondary transition-colors">Nos Compétences</a></li>
+        <li><a href="/#competences" class="hover:text-secondary transition-colors">Nos Compétences</a></li>
         <li><a href="/membership" class="hover:text-secondary transition-colors">Devenir Membre</a></li>
         <li><a href="/contact" class="hover:text-secondary transition-colors">Contactez-nous</a></li>
         <li><a href="#" class="hover:text-secondary transition-colors">À Propos de Nous</a></li>
@@ -324,13 +331,13 @@ ${nav}
   <!-- HERO -->
   <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center py-10 md:py-16">
     <div class="space-y-6">
-      <a href="/competences" class="inline-flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> Tous les domaines</a>
+      <a href="/#competences" class="inline-flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> Tous les domaines</a>
       <div><span class="inline-block px-4 py-1.5 rounded-full bg-${c.color}/10 text-${c.color} text-xs font-bold uppercase tracking-widest">${c.sub}</span></div>
       <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">${titleHtml(c)}</h1>
       <p class="text-lg text-on-surface-variant leading-relaxed max-w-lg">${c.intro}</p>
       <div class="flex flex-wrap gap-4 pt-2">
         <a href="/membership" class="bg-primary text-on-primary px-8 py-4 soft-pill font-bold shadow-md hover:shadow-xl active:scale-95">Devenir Membre</a>
-        <a href="/competences" class="bg-white border border-surface-variant text-on-background px-8 py-4 soft-pill font-bold hover:border-secondary transition-colors">Voir tous les domaines</a>
+        <a href="/#competences" class="bg-white border border-surface-variant text-on-background px-8 py-4 soft-pill font-bold hover:border-secondary transition-colors">Voir tous les domaines</a>
       </div>
     </div>
     <div class="relative">
@@ -342,17 +349,15 @@ ${nav}
   <!-- EXPLORE (carousel) -->
   <section class="bg-surface-container py-20 md:py-28 px-4 md:px-10">
     <div class="max-w-6xl mx-auto">
-      <div class="flex items-end justify-between gap-6 mb-12" data-rv>
-        <div class="max-w-xl">
-          <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Ce Que Les Enfants Vont Explorer</h2>
-          <p class="text-on-surface-variant mt-3 text-lg">Pas de cours rigides. Des domaines passionnants où les enfants expérimentent, construisent et découvrent leurs passions.</p>
-        </div>
-        <div class="hidden md:flex gap-2 shrink-0">
-          <button onclick="document.getElementById('exp-${c.slug}').scrollBy({left:-340,behavior:'smooth'})" aria-label="Précédent" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
-          <button onclick="document.getElementById('exp-${c.slug}').scrollBy({left:340,behavior:'smooth'})" aria-label="Suivant" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
-        </div>
+      <div class="text-center max-w-2xl mx-auto mb-8" data-rv>
+        <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Ce Que Les Enfants Vont Explorer</h2>
+        <p class="text-on-surface-variant mt-3 text-lg">Pas de cours rigides. Des domaines passionnants où les enfants expérimentent, construisent et découvrent leurs passions.</p>
       </div>
-      <div id="exp-${c.slug}" data-hscroll class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth">${topics}
+      <div class="hidden md:flex justify-center gap-2 mb-12" data-rv>
+        <button onclick="document.getElementById('exp-${c.slug}').scrollBy({left:-340,behavior:'smooth'})" aria-label="Précédent" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+        <button onclick="document.getElementById('exp-${c.slug}').scrollBy({left:340,behavior:'smooth'})" aria-label="Suivant" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
+      </div>
+      <div id="exp-${c.slug}" data-hscroll class="bleed flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth px-4 md:px-10">${topics}
       </div>
     </div>
   </section>
@@ -512,7 +517,7 @@ ${nav}
           <button onclick="document.getElementById('gar-carousel').scrollBy({left:320,behavior:'smooth'})" aria-label="Suivant" class="w-11 h-11 rounded-full bg-white border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
         </div>
       </div>
-      <div id="gar-carousel" data-hscroll class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth">${guarantees}</div>
+      <div id="gar-carousel" data-hscroll class="bleed flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth px-4 md:px-10">${guarantees}</div>
       <p class="text-center text-on-surface-variant mt-12 text-sm" data-rv>Une question, ou besoin d'une solution pour une école ou un groupe ? <a href="/contact" class="text-primary font-semibold hover:underline">Contactez-nous</a></p>
     </div>
   </section>
@@ -613,7 +618,7 @@ ${footer}
 </body></html>`;
 }
 
-await writeFile(join(ROOT,'competences','index.html'), buildIndex(), 'utf8'); console.log('wrote competences/index.html');
+// competences listing page removed — the 9 skills now live in the nav menu dropdown
 await mkdir(join(ROOT,'membership'),{recursive:true}); await writeFile(join(ROOT,'membership','index.html'), buildMembership(), 'utf8'); console.log('wrote membership/index.html');
 await mkdir(join(ROOT,'contact'),{recursive:true}); await writeFile(join(ROOT,'contact','index.html'), buildContact(), 'utf8'); console.log('wrote contact/index.html');
 

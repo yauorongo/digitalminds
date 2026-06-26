@@ -53,6 +53,7 @@
   .course-card:hover { border-color:#004ac6; box-shadow:0 18px 40px -12px rgba(15,23,42,.12); transform:translateY(-6px); }
   .no-scrollbar::-webkit-scrollbar { display:none; }
   .no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+  .bleed { width:80vw; margin-left:calc(50% - 40vw); margin-right:calc(50% - 40vw); }
   .stagger-card { position:absolute; top:50%; left:50%; width:min(92%,540px); background:#fff; border:1px solid #dae2fd; border-radius:1.5rem; padding:2rem 2.25rem; box-shadow:0 24px 55px -15px rgba(15,23,42,.18); transition:transform .6s cubic-bezier(.16,1,.3,1), opacity .55s ease, filter .55s ease; will-change:transform,opacity; }
   .stg-dot { width:8px; height:8px; border-radius:9999px; background:#c3c6d7; border:none; cursor:pointer; padding:0; transition:width .3s ease, background .3s ease; }
   .stg-dot[aria-current="true"] { width:26px; background:#004ac6; }
@@ -90,7 +91,22 @@
   </a>
   <nav class="hidden md:flex gap-8 items-center">
     <a class="text-sm font-bold text-secondary hover:opacity-70 transition-opacity" href="/">Accueil</a>
-    <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="/competences">Les Compétences</a>
+    <div class="relative group">
+      <button class="text-sm text-on-surface-variant hover:text-secondary transition-colors inline-flex items-center gap-1 cursor-pointer">Les Compétences <span class="material-symbols-outlined text-base transition-transform group-hover:rotate-180">expand_more</span></button>
+      <div class="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 focus-within:visible focus-within:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full pt-3 w-64 z-50">
+        <div class="bg-white rounded-2xl border border-surface-variant shadow-xl p-2 grid gap-0.5">
+          <a href="/competences/pensee-creative" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Pensée Créative</a>
+          <a href="/competences/intelligence-artificielle" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Intelligence Artificielle</a>
+          <a href="/competences/programmation-technologie" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Programmation &amp; Technologie</a>
+          <a href="/competences/communication" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Communication</a>
+          <a href="/competences/donnees-analyse" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Données, Analyse &amp; Sécurité</a>
+          <a href="/competences/leadership" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Leadership</a>
+          <a href="/competences/entrepreneuriat" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Entrepreneuriat</a>
+          <a href="/competences/creativite-digitale" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Créativité Digitale</a>
+          <a href="/competences/apprentissage-continu" class="block px-4 py-2.5 rounded-xl text-sm text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Apprentissage Continu</a>
+        </div>
+      </div>
+    </div>
     <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="/membership">Devenir Membre</a>
     <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="/contact">Contact</a>
   </nav>
@@ -196,22 +212,17 @@
 
   <!-- ============ 9 TRAINS DE COMPÉTENCES (carousel) ============ -->
   <section id="competences" class="px-4 md:px-10 max-w-6xl mx-auto space-y-10 scroll-mt-28">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6" data-rv>
-      <div class="max-w-xl">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2">9 Trains de Compétences</p>
-        <h3 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Choisis ton terrain.</h3>
-        <p class="text-on-surface-variant mt-2 text-lg">Une adhésion = accès à tous.</p>
-      </div>
-      <div class="flex items-center gap-4">
-        <a class="text-secondary font-bold flex items-center gap-2 hover:underline whitespace-nowrap" href="/competences">Tout voir <span class="material-symbols-outlined">arrow_forward</span></a>
-        <div class="hidden sm:flex gap-2">
-          <button onclick="document.getElementById('comp-carousel').scrollBy({left:-320,behavior:'smooth'})" aria-label="Précédent" class="w-11 h-11 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
-          <button onclick="document.getElementById('comp-carousel').scrollBy({left:320,behavior:'smooth'})" aria-label="Suivant" class="w-11 h-11 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
-        </div>
-      </div>
+    <div class="text-center max-w-2xl mx-auto" data-rv>
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2">9 Trains de Compétences</p>
+      <h3 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Choisis ton terrain.</h3>
+      <p class="text-on-surface-variant mt-2 text-lg">Une adhésion = accès à tous.</p>
+    </div>
+    <div class="hidden sm:flex justify-center gap-2" data-rv>
+      <button onclick="document.getElementById('comp-carousel').scrollBy({left:-320,behavior:'smooth'})" aria-label="Précédent" class="w-11 h-11 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+      <button onclick="document.getElementById('comp-carousel').scrollBy({left:320,behavior:'smooth'})" aria-label="Suivant" class="w-11 h-11 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
     </div>
 
-    <div id="comp-carousel" class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth" data-rv>
+    <div id="comp-carousel" class="bleed flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth px-4 md:px-10" data-rv>
       <a href="/competences/pensee-creative" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
         <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=640&q=75" alt="Pensée Créative" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-secondary">01</span></div>
         <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-secondary text-xl" style="font-variation-settings:'FILL' 1;">lightbulb</span><h4 class="text-lg font-bold text-on-background leading-tight">Pensée Créative</h4></div><p class="text-on-surface-variant text-sm">Imaginer et innover</p><span class="mt-3 inline-flex items-center gap-1.5 text-secondary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
@@ -338,7 +349,7 @@
     <div>
       <h4 class="font-bold text-sm text-on-background mb-4">Entreprise</h4>
       <ul class="space-y-2.5 text-sm text-on-surface-variant">
-        <li><a href="/competences" class="hover:text-secondary transition-colors">Nos Compétences</a></li>
+        <li><a href="/#competences" class="hover:text-secondary transition-colors">Nos Compétences</a></li>
         <li><a href="/membership" class="hover:text-secondary transition-colors">Devenir Membre</a></li>
         <li><a href="/contact" class="hover:text-secondary transition-colors">Contactez-nous</a></li>
         <li><a href="#" class="hover:text-secondary transition-colors">À Propos de Nous</a></li>
@@ -367,7 +378,7 @@
 <!-- ============ MOBILE BOTTOM NAV ============ -->
 <nav class="md:hidden fixed bottom-4 left-4 right-4 z-50 flex justify-around items-center px-3 py-2.5 bg-white/85 backdrop-blur-2xl border border-white/60 shadow-2xl rounded-full">
   <a href="/" class="flex flex-col items-center text-secondary"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">home</span><span class="text-[10px] font-bold">Accueil</span></a>
-  <a href="/competences" class="flex flex-col items-center text-on-surface-variant hover:text-secondary"><span class="material-symbols-outlined">explore</span><span class="text-[10px]">Domaines</span></a>
+  <a href="/#competences" class="flex flex-col items-center text-on-surface-variant hover:text-secondary"><span class="material-symbols-outlined">explore</span><span class="text-[10px]">Domaines</span></a>
   <a href="/membership" class="flex flex-col items-center -translate-y-3"><span class="w-12 h-12 bg-primary rounded-full grid place-items-center text-white shadow-lg border-4 border-white"><span class="material-symbols-outlined">badge</span></span></a>
   <a href="/membership" class="flex flex-col items-center text-on-surface-variant hover:text-secondary"><span class="material-symbols-outlined">card_membership</span><span class="text-[10px]">Membre</span></a>
   <a href="/contact" class="flex flex-col items-center text-on-surface-variant hover:text-secondary"><span class="material-symbols-outlined">mail</span><span class="text-[10px]">Contact</span></a>
