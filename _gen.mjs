@@ -153,6 +153,10 @@ const head = (title, desc) => `<!DOCTYPE html>
   .curved-edge{border-radius:2rem;}
   .soft-pill{border-radius:100px;transition:transform .3s ease,box-shadow .3s ease;}
   .soft-pill:hover{transform:scale(1.04);}
+  .course-card{background:#fff;border:1px solid #dae2fd;box-shadow:0 10px 25px -5px rgba(15,23,42,.05);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;}
+  .course-card:hover{border-color:#004ac6;box-shadow:0 18px 40px -12px rgba(15,23,42,.12);transform:translateY(-4px);}
+  .no-scrollbar::-webkit-scrollbar{display:none;}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
   .blob-animate{animation:blob 18s infinite alternate cubic-bezier(.45,0,.55,1);}
   @keyframes blob{0%{transform:translate(0,0) scale(1) rotate(0)}100%{transform:translate(18px,-26px) scale(1.12) rotate(10deg)}}
   [data-rv]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
@@ -223,28 +227,92 @@ const footer = `<footer class="bg-surface-container-low border-t border-surface-
 const reveal = `<script>
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('[data-rv]').forEach((el,i)=>{el.style.transitionDelay=(i%3)*70+'ms';io.observe(el);});
+  document.querySelectorAll('[data-hscroll]').forEach((el)=>{
+    const DEAD=0.16, MAX=18; let vx=0;
+    document.addEventListener('mousemove',(e)=>{
+      const r=el.getBoundingClientRect();
+      const inside=e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;
+      if(!inside){vx=0;return;}
+      const c=(e.clientX-r.left)/r.width-0.5;
+      if(Math.abs(c)<DEAD){vx=0;return;}
+      const mag=(Math.abs(c)-DEAD)/(0.5-DEAD);
+      vx=Math.sign(c)*mag*mag*MAX;
+    },{passive:true});
+    (function loop(){ if(Math.abs(vx)>0.2) el.scrollLeft+=vx; requestAnimationFrame(loop); })();
+  });
 </script>`;
 
 const titleHtml = (c) => c.title === c.accent
   ? `<span class="text-primary italic">${c.title}</span>`
   : `${c.title.replace(c.accent, `</span><span class="text-primary italic">${c.accent}</span><span>`)}`.replace(/^/, '<span>') + '</span>';
 
+const U = (id,w=900) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+const PIC = {
+  creative:'1499951360447-b19be8fe80f5', brainstorm:'1531545514256-b1400bc00f31',
+  robot:'1485827404703-89b55fcc595e', coding:'1517694712202-14dd9538aa97',
+  coding2:'1555066931-4365d14bab8c', kid_tech:'1587620962725-abab7fe55159',
+  teamwork:'1522071820081-009f0129c71c', data:'1551288049-bebda4e38f71',
+  data2:'1460925895917-afdab827c52f', leadership:'1552664730-d307ca884978',
+  entrepren:'1559136555-9303baea8ebd', design:'1561070791-2526d30994b5',
+  design2:'1558655146-9f40138edfeb', learning:'1503676260728-1c00da094a0b',
+  robotics:'1535378620166-273708d44e4c', video_edit:'1574717024653-61fd2cf4d44d',
+  study:'1497633762265-9d179a990aa6',
+};
+const media = {
+  'pensee-creative':         { hero:'creative',   cards:['brainstorm','creative','design','learning','video_edit','teamwork'] },
+  'intelligence-artificielle':{ hero:'robot',     cards:['robot','robotics','coding','data','kid_tech','teamwork'] },
+  'programmation-technologie':{ hero:'coding',     cards:['coding','coding2','kid_tech','robotics','design','data'] },
+  'communication':           { hero:'teamwork',   cards:['teamwork','leadership','learning','study','brainstorm','video_edit'] },
+  'donnees-analyse':         { hero:'data',        cards:['data','data2','coding','study','learning','teamwork'] },
+  'leadership':              { hero:'leadership',  cards:['leadership','teamwork','brainstorm','study','entrepren','learning'] },
+  'entrepreneuriat':         { hero:'entrepren',   cards:['entrepren','leadership','teamwork','design','data2','brainstorm'] },
+  'creativite-digitale':     { hero:'design',      cards:['design','design2','video_edit','creative','kid_tech','robotics'] },
+  'apprentissage-continu':   { hero:'learning',    cards:['learning','study','kid_tech','coding','teamwork','brainstorm'] },
+};
+const galleryItems = [
+  ['kid_tech','Jeu vidéo','Créé par un membre','md:col-span-2 md:row-span-2'],
+  ['robotics','Robot maison','Atelier IA & électronique','md:col-span-2 md:row-span-1'],
+  ['design2','Identité de marque','Projet de design','md:col-span-1 md:row-span-1'],
+  ['video_edit','Court-métrage','Montage & effets','md:col-span-1 md:row-span-1'],
+];
+const heroFile = {
+  'pensee-creative':'/videos/pensee-creative.webp',
+  'intelligence-artificielle':'/videos/intelligence-artificielle.webp',
+  'programmation-technologie':'/videos/programmation-technologie.webp',
+  'communication':'/videos/communication.webp',
+  'donnees-analyse':'/videos/donnees-analyse.webp',
+  'leadership':'/videos/leadership.webp',
+  'entrepreneuriat':'/videos/entrepreneuriat.gif',
+  'creativite-digitale':'/videos/creativite-digitale.webp',
+  'apprentissage-continu':'/videos/apprentissage-continu.webp',
+};
+
 function buildCompetence(c) {
+  const m = media[c.slug];
   const topics = c.topics.map(([t,d],i)=>`
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-widest text-${c.color}">Domaine ${String(i+1).padStart(2,'0')}</span>
-            <span class="material-symbols-outlined text-${c.color}/40">arrow_outward</span>
+        <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
+          <div class="h-44 overflow-hidden"><img src="${U(PIC[m.cards[i]])}" alt="${t}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <div class="text-${c.color} text-xs font-bold uppercase tracking-widest mb-2">Domaine ${String(i+1).padStart(2,'0')}</div>
+            <h3 class="text-lg font-bold text-on-background mb-2">${t}</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">${d}</p>
           </div>
-          <h3 class="text-xl font-bold text-on-background mb-2">${t}</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">${d}</p>
-        </div>`).join('');
+        </article>`).join('');
 
   const bullets = c.bullets.map(b=>`
           <li class="flex items-start gap-3" data-rv>
             <span class="material-symbols-outlined text-${c.color} mt-0.5" style="font-variation-settings:'FILL' 1;">check_circle</span>
             <span class="text-on-surface-variant">${b}</span>
           </li>`).join('');
+
+  const gallery = galleryItems.map(([k,t,s,span])=>`
+        <div class="${span} group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
+          <img src="${U(PIC[k])}" alt="${t}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">${s}</span>
+            <h4 class="text-white font-bold text-lg leading-tight">${t}</h4>
+          </div>
+        </div>`).join('');
 
   return `${head(`${c.title} — DigitalMinds`, c.intro.slice(0,150))}
 <body class="overflow-x-hidden pb-10">
@@ -254,7 +322,7 @@ ${nav}
 <main class="pt-24 md:pt-28">
 
   <!-- HERO -->
-  <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center py-12 md:py-20">
+  <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center py-10 md:py-16">
     <div class="space-y-6">
       <a href="/competences" class="inline-flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> Tous les domaines</a>
       <div><span class="inline-block px-4 py-1.5 rounded-full bg-${c.color}/10 text-${c.color} text-xs font-bold uppercase tracking-widest">${c.sub}</span></div>
@@ -265,22 +333,26 @@ ${nav}
         <a href="/competences" class="bg-white border border-surface-variant text-on-background px-8 py-4 soft-pill font-bold hover:border-secondary transition-colors">Voir tous les domaines</a>
       </div>
     </div>
-    <div class="relative flex justify-center md:justify-end">
-      <div class="absolute w-72 h-72 bg-gradient-to-br from-${c.color} via-tertiary to-primary rounded-full blur-3xl opacity-30 blob-animate"></div>
-      <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-[3rem] bg-white border border-surface-variant shadow-2xl grid place-items-center">
-        <span class="material-symbols-outlined text-${c.color}" style="font-size:120px;font-variation-settings:'FILL' 1;">${c.icon}</span>
-      </div>
+    <div class="relative">
+      <div class="absolute -inset-6 bg-gradient-to-br from-${c.color} via-tertiary to-primary rounded-full blur-3xl opacity-25 blob-animate"></div>
+      <img src="${heroFile[c.slug]}" alt="${c.title}" class="relative w-full h-[300px] md:h-[440px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl" />
     </div>
   </section>
 
-  <!-- EXPLORE -->
+  <!-- EXPLORE (carousel) -->
   <section class="bg-surface-container py-20 md:py-28 px-4 md:px-10">
     <div class="max-w-6xl mx-auto">
-      <div class="max-w-2xl mb-14" data-rv>
-        <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Ce Que Les Enfants Vont Explorer</h2>
-        <p class="text-on-surface-variant mt-3 text-lg">Pas de cours rigides. Ce sont des domaines passionnants où les enfants peuvent expérimenter, construire et découvrir leurs passions.</p>
+      <div class="flex items-end justify-between gap-6 mb-12" data-rv>
+        <div class="max-w-xl">
+          <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Ce Que Les Enfants Vont Explorer</h2>
+          <p class="text-on-surface-variant mt-3 text-lg">Pas de cours rigides. Des domaines passionnants où les enfants expérimentent, construisent et découvrent leurs passions.</p>
+        </div>
+        <div class="hidden md:flex gap-2 shrink-0">
+          <button onclick="document.getElementById('exp-${c.slug}').scrollBy({left:-340,behavior:'smooth'})" aria-label="Précédent" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+          <button onclick="document.getElementById('exp-${c.slug}').scrollBy({left:340,behavior:'smooth'})" aria-label="Suivant" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${topics}
+      <div id="exp-${c.slug}" data-hscroll class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth">${topics}
       </div>
     </div>
   </section>
@@ -295,14 +367,25 @@ ${nav}
     </ul>
   </section>
 
+  <!-- SHOWCASE -->
+  <section class="px-4 md:px-10 max-w-6xl mx-auto pb-20 md:pb-28">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-rv>
+      <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Réalisations de nos membres</h2>
+      <p class="text-on-surface-variant mt-3 text-lg">Un aperçu de ce que les jeunes créent quand on leur donne les bons outils et la liberté d'oser.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[560px]" data-rv>${gallery}
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section class="px-4 md:px-10 pb-8">
-    <div class="max-w-5xl mx-auto bg-gradient-to-br from-primary via-primary-container to-secondary rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl" data-rv>
-      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
+  <section class="px-4 md:px-10 pb-12">
+    <div class="max-w-4xl mx-auto bg-surface-container-low border border-surface-variant rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)]" data-rv>
+      <div class="absolute -top-20 -right-12 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-12 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       <div class="relative z-10 space-y-6 max-w-xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white">Prêt à commencer l'exploration ?</h2>
-        <p class="text-white/90 text-lg">Une seule adhésion débloque ce domaine et les 8 autres. Toute l'année, à ton rythme.</p>
-        <a href="/membership" class="inline-block bg-white text-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-on-background leading-tight">Prêt à commencer l'exploration ?</h2>
+        <p class="text-on-surface-variant text-lg">Une seule adhésion débloque ce domaine et les 8 autres. Toute l'année, à ton rythme.</p>
+        <a href="/membership" class="inline-block bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
       </div>
     </div>
   </section>
@@ -358,12 +441,13 @@ ${nav}
     </div>
   </section>
   <section class="px-4 md:px-10 py-16">
-    <div class="max-w-5xl mx-auto bg-gradient-to-br from-primary via-primary-container to-secondary rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl" data-rv>
-      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
+    <div class="max-w-5xl mx-auto bg-surface-container-low border border-surface-variant rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)]" data-rv>
+      <div class="absolute -top-20 -right-12 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-12 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       <div class="relative z-10 space-y-6 max-w-xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white">Prêt à développer ces 9 compétences ?</h2>
-        <p class="text-white/90 text-lg">Une seule adhésion = accès à tous les domaines, toute l'année.</p>
-        <a href="/membership" class="inline-block bg-white text-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-on-background">Prêt à développer ces 9 compétences ?</h2>
+        <p class="text-on-surface-variant text-lg">Une seule adhésion = accès à tous les domaines, toute l'année.</p>
+        <a href="/membership" class="inline-block bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
       </div>
     </div>
   </section>
@@ -385,53 +469,67 @@ function buildMembership() {
     "Attestation officielle valorisable sur Parcoursup",
   ].map(t=>`<li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">${t}</span></li>`).join('');
   const guarantees = [
-    ["handshake","Réseau d'entreprises partenaires","Startups tech, agences de développement web, studios de création de jeux vidéo, entreprises spécialisées en IA."],
-    ["support_agent","Accompagnement personnalisé","Aide à la rédaction du CV, préparation aux entretiens, mise en relation directe avec nos partenaires."],
-    ["verified","Stage garanti par défaut","Si aucun stage externe n'est trouvé, votre enfant effectue automatiquement un stage d'immersion de 1 à 2 semaines au sein de notre centre."],
-    ["workspace_premium","Attestation officielle","Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires."],
-  ].map(([i,t,d])=>`
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">${i}</span></div>
-          <h3 class="text-lg font-bold text-on-background mb-2">${t}</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">${d}</p>
-        </div>`).join('');
+    ["1522071820081-009f0129c71c","Réseau d'entreprises partenaires","Startups tech, agences de développement web, studios de création de jeux vidéo, entreprises spécialisées en IA."],
+    ["1552664730-d307ca884978","Accompagnement personnalisé","Aide à la rédaction du CV, préparation aux entretiens, mise en relation directe avec nos partenaires."],
+    ["1587620962725-abab7fe55159","Stage garanti par défaut","Si aucun stage externe n'est trouvé, votre enfant effectue automatiquement un stage d'immersion de 1 à 2 semaines au sein de notre centre."],
+    ["1497633762265-9d179a990aa6","Attestation officielle","Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires."],
+    ["1531545514256-b1400bc00f31","Anglais inclus & gratuit","Sessions de conversation et d'apprentissage de l'anglais comprises dans l'adhésion — entièrement gratuites."],
+  ].map(([img,t,d])=>`
+        <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
+          <div class="h-40 overflow-hidden"><img src="${U(img)}" alt="${t}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-on-background mb-2">${t}</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">${d}</p>
+          </div>
+        </article>`).join('');
   return `${head('Devenir Membre — DigitalMinds',"Une seule adhésion. Tous les Trains de Compétences débloqués. Toute l'année.")}
 <body class="overflow-x-hidden pb-10">
 <div class="creative-blob blob-1"></div><div class="creative-blob blob-2"></div>
 ${nav}
 <main class="pt-24 md:pt-28">
-  <section class="px-4 md:px-10 max-w-3xl mx-auto text-center py-12 md:py-16 space-y-5">
-    <span class="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest">Adhésion</span>
-    <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">Devenir <span class="text-primary italic">Membre</span></h1>
-    <p class="text-lg text-on-surface-variant">Une seule adhésion. Tous les Trains de Compétences débloqués. Toute l'année.</p>
-  </section>
-  <section class="px-4 md:px-10 pb-8">
-    <div class="max-w-xl mx-auto white-neat-card curved-edge p-8 md:p-10 text-center" data-rv>
-      <span class="inline-block px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-widest mb-6">Offre unique — Tout inclus</span>
-      <p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wide">Adhésion Annuelle</p>
-      <div class="flex items-end justify-center gap-1 mt-2"><span class="text-6xl md:text-7xl font-extrabold text-on-background">250</span><span class="text-2xl font-bold text-on-surface-variant mb-2">€ / an</span></div>
-      <p class="text-sm text-on-surface-variant mt-1">Soit moins de 21 € par mois.</p>
-      <ul class="text-left space-y-3 mt-8 max-w-md mx-auto">${inclusions}</ul>
-      <a href="/contact" class="mt-8 inline-block bg-primary text-on-primary px-10 py-4 soft-pill font-bold shadow-md hover:shadow-xl active:scale-95">Devenir Membre — 250 € / an</a>
+  <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center py-10 md:py-16">
+    <div class="space-y-5">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest">Adhésion</span>
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">Devenir <span class="text-primary italic">Membre</span></h1>
+      <p class="text-lg text-on-surface-variant">Une seule adhésion. Tous les Trains de Compétences débloqués. Toute l'année.</p>
+    </div>
+    <div class="relative">
+      <div class="absolute -inset-6 bg-gradient-to-br from-secondary via-tertiary to-primary rounded-full blur-3xl opacity-25 blob-animate"></div>
+      <img src="/videos/membership.webp" alt="Devenir Membre" class="relative w-full h-[300px] md:h-[420px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl" />
     </div>
   </section>
+  <!-- Garantie Stage (full width) -->
   <section class="bg-surface-container py-20 md:py-28 px-4 md:px-10">
     <div class="max-w-6xl mx-auto">
-      <div class="max-w-2xl mb-12" data-rv>
+      <div class="max-w-2xl mx-auto text-center mb-12" data-rv>
         <span class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">Garantie Stage</span>
         <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Accompagnement Stage Professionnel Garanti</h2>
         <p class="text-on-surface-variant mt-4 text-lg leading-relaxed">Toute adhésion garantit un stage — auprès de nos partenaires, ou directement au sein de notre école si aucun stage externe n'est trouvé. Chaque membre bénéficie d'un accompagnement personnalisé pour décrocher un stage professionnel.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">${guarantees}</div>
+      <div class="flex justify-center md:justify-end mb-5">
+        <div class="hidden md:flex gap-2">
+          <button onclick="document.getElementById('gar-carousel').scrollBy({left:-320,behavior:'smooth'})" aria-label="Précédent" class="w-11 h-11 rounded-full bg-white border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+          <button onclick="document.getElementById('gar-carousel').scrollBy({left:320,behavior:'smooth'})" aria-label="Suivant" class="w-11 h-11 rounded-full bg-white border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
+        </div>
+      </div>
+      <div id="gar-carousel" data-hscroll class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth">${guarantees}</div>
+      <p class="text-center text-on-surface-variant mt-12 text-sm" data-rv>Une question, ou besoin d'une solution pour une école ou un groupe ? <a href="/contact" class="text-primary font-semibold hover:underline">Contactez-nous</a></p>
     </div>
   </section>
-  <section class="px-4 md:px-10 py-16">
-    <div class="max-w-5xl mx-auto bg-gradient-to-br from-primary via-primary-container to-secondary rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl" data-rv>
-      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
-      <div class="relative z-10 space-y-6 max-w-xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white">Une question avant de rejoindre ?</h2>
-        <p class="text-white/90 text-lg">Besoin d'une solution pour une école ou un groupe ? Parlons-en.</p>
-        <a href="/contact" class="inline-block bg-white text-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-transform active:scale-95">Nous Contacter</a>
+
+  <!-- Offre unique (full width) -->
+  <section class="px-4 md:px-10 py-16 md:py-24">
+    <div class="max-w-6xl mx-auto rounded-[2rem] overflow-hidden border border-surface-variant shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)] grid md:grid-cols-2" data-rv>
+      <div class="p-8 md:p-12 bg-surface-container-low flex flex-col justify-center">
+        <span class="inline-block self-start px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-widest mb-6">Offre unique — Tout inclus</span>
+        <p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wide">Adhésion Annuelle</p>
+        <div class="flex items-end gap-1 mt-2"><span class="text-6xl md:text-7xl font-extrabold text-on-background">250</span><span class="text-2xl font-bold text-on-surface-variant mb-2">€ / an</span></div>
+        <p class="text-sm text-on-surface-variant mt-1">Soit moins de 21 € par mois.</p>
+        <a href="/contact" class="mt-8 inline-block bg-primary text-on-primary px-10 py-4 soft-pill font-bold shadow-md hover:shadow-xl active:scale-95 text-center">Devenir Membre — 250 € / an</a>
+      </div>
+      <div class="p-8 md:p-12 bg-white">
+        <h3 class="text-lg font-bold text-on-background mb-6">Tout ce qui est inclus</h3>
+        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3.5">${inclusions}</ul>
       </div>
     </div>
   </section>

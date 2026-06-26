@@ -27,6 +27,10 @@
   .curved-edge{border-radius:2rem;}
   .soft-pill{border-radius:100px;transition:transform .3s ease,box-shadow .3s ease;}
   .soft-pill:hover{transform:scale(1.04);}
+  .course-card{background:#fff;border:1px solid #dae2fd;box-shadow:0 10px 25px -5px rgba(15,23,42,.05);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;}
+  .course-card:hover{border-color:#004ac6;box-shadow:0 18px 40px -12px rgba(15,23,42,.12);transform:translateY(-4px);}
+  .no-scrollbar::-webkit-scrollbar{display:none;}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
   .blob-animate{animation:blob 18s infinite alternate cubic-bezier(.45,0,.55,1);}
   @keyframes blob{0%{transform:translate(0,0) scale(1) rotate(0)}100%{transform:translate(18px,-26px) scale(1.12) rotate(10deg)}}
   [data-rv]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
@@ -54,7 +58,7 @@
 <main class="pt-24 md:pt-28">
 
   <!-- HERO -->
-  <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center py-12 md:py-20">
+  <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center py-10 md:py-16">
     <div class="space-y-6">
       <a href="/competences" class="inline-flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined text-base">arrow_back</span> Tous les domaines</a>
       <div><span class="inline-block px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-widest">Comprendre et exploiter les données</span></div>
@@ -65,70 +69,74 @@
         <a href="/competences" class="bg-white border border-surface-variant text-on-background px-8 py-4 soft-pill font-bold hover:border-secondary transition-colors">Voir tous les domaines</a>
       </div>
     </div>
-    <div class="relative flex justify-center md:justify-end">
-      <div class="absolute w-72 h-72 bg-gradient-to-br from-tertiary via-tertiary to-primary rounded-full blur-3xl opacity-30 blob-animate"></div>
-      <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-[3rem] bg-white border border-surface-variant shadow-2xl grid place-items-center">
-        <span class="material-symbols-outlined text-tertiary" style="font-size:120px;font-variation-settings:'FILL' 1;">insights</span>
-      </div>
+    <div class="relative">
+      <div class="absolute -inset-6 bg-gradient-to-br from-tertiary via-tertiary to-primary rounded-full blur-3xl opacity-25 blob-animate"></div>
+      <img src="/videos/donnees-analyse.webp" alt="Données, Analyse & Sécurité" class="relative w-full h-[300px] md:h-[440px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl" />
     </div>
   </section>
 
-  <!-- EXPLORE -->
+  <!-- EXPLORE (carousel) -->
   <section class="bg-surface-container py-20 md:py-28 px-4 md:px-10">
     <div class="max-w-6xl mx-auto">
-      <div class="max-w-2xl mb-14" data-rv>
-        <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Ce Que Les Enfants Vont Explorer</h2>
-        <p class="text-on-surface-variant mt-3 text-lg">Pas de cours rigides. Ce sont des domaines passionnants où les enfants peuvent expérimenter, construire et découvrir leurs passions.</p>
+      <div class="flex items-end justify-between gap-6 mb-12" data-rv>
+        <div class="max-w-xl">
+          <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Ce Que Les Enfants Vont Explorer</h2>
+          <p class="text-on-surface-variant mt-3 text-lg">Pas de cours rigides. Des domaines passionnants où les enfants expérimentent, construisent et découvrent leurs passions.</p>
+        </div>
+        <div class="hidden md:flex gap-2 shrink-0">
+          <button onclick="document.getElementById('exp-donnees-analyse').scrollBy({left:-340,behavior:'smooth'})" aria-label="Précédent" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+          <button onclick="document.getElementById('exp-donnees-analyse').scrollBy({left:340,behavior:'smooth'})" aria-label="Suivant" class="w-12 h-12 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-widest text-tertiary">Domaine 01</span>
-            <span class="material-symbols-outlined text-tertiary/40">arrow_outward</span>
+      <div id="exp-donnees-analyse" data-hscroll class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth">
+        <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
+          <div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Lire un Graphique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <div class="text-tertiary text-xs font-bold uppercase tracking-widest mb-2">Domaine 01</div>
+            <h3 class="text-lg font-bold text-on-background mb-2">Lire un Graphique</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Décoder facilement courbes, camemberts et histogrammes vus partout dans les médias.</p>
           </div>
-          <h3 class="text-xl font-bold text-on-background mb-2">Lire un Graphique</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Décoder facilement courbes, camemberts et histogrammes vus partout dans les médias.</p>
-        </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-widest text-tertiary">Domaine 02</span>
-            <span class="material-symbols-outlined text-tertiary/40">arrow_outward</span>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
+          <div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Tableurs comme un Pro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <div class="text-tertiary text-xs font-bold uppercase tracking-widest mb-2">Domaine 02</div>
+            <h3 class="text-lg font-bold text-on-background mb-2">Tableurs comme un Pro</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Maîtriser Google Sheets et Excel : formules, tris, tableaux croisés dynamiques.</p>
           </div>
-          <h3 class="text-xl font-bold text-on-background mb-2">Tableurs comme un Pro</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Maîtriser Google Sheets et Excel : formules, tris, tableaux croisés dynamiques.</p>
-        </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-widest text-tertiary">Domaine 03</span>
-            <span class="material-symbols-outlined text-tertiary/40">arrow_outward</span>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
+          <div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80" alt="Visualiser ses Données" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <div class="text-tertiary text-xs font-bold uppercase tracking-widest mb-2">Domaine 03</div>
+            <h3 class="text-lg font-bold text-on-background mb-2">Visualiser ses Données</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Transformer des chiffres bruts en infographies claires et belles.</p>
           </div>
-          <h3 class="text-xl font-bold text-on-background mb-2">Visualiser ses Données</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Transformer des chiffres bruts en infographies claires et belles.</p>
-        </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-widest text-tertiary">Domaine 04</span>
-            <span class="material-symbols-outlined text-tertiary/40">arrow_outward</span>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
+          <div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=80" alt="Mini-Sondages" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <div class="text-tertiary text-xs font-bold uppercase tracking-widest mb-2">Domaine 04</div>
+            <h3 class="text-lg font-bold text-on-background mb-2">Mini-Sondages</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Créer ses propres enquêtes et analyser les réponses pour comprendre un sujet.</p>
           </div>
-          <h3 class="text-xl font-bold text-on-background mb-2">Mini-Sondages</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Créer ses propres enquêtes et analyser les réponses pour comprendre un sujet.</p>
-        </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-widest text-tertiary">Domaine 05</span>
-            <span class="material-symbols-outlined text-tertiary/40">arrow_outward</span>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
+          <div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80" alt="Données du Quotidien" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <div class="text-tertiary text-xs font-bold uppercase tracking-widest mb-2">Domaine 05</div>
+            <h3 class="text-lg font-bold text-on-background mb-2">Données du Quotidien</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Étudier ses statistiques de jeu, son temps d'écran ou son activité sportive.</p>
           </div>
-          <h3 class="text-xl font-bold text-on-background mb-2">Données du Quotidien</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Étudier ses statistiques de jeu, son temps d'écran ou son activité sportive.</p>
-        </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-widest text-tertiary">Domaine 06</span>
-            <span class="material-symbols-outlined text-tertiary/40">arrow_outward</span>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
+          <div class="h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="Esprit Critique sur les Chiffres" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <div class="text-tertiary text-xs font-bold uppercase tracking-widest mb-2">Domaine 06</div>
+            <h3 class="text-lg font-bold text-on-background mb-2">Esprit Critique sur les Chiffres</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Détecter les graphiques trompeurs et les statistiques mal présentées.</p>
           </div>
-          <h3 class="text-xl font-bold text-on-background mb-2">Esprit Critique sur les Chiffres</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Détecter les graphiques trompeurs et les statistiques mal présentées.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -159,14 +167,53 @@
     </ul>
   </section>
 
+  <!-- SHOWCASE -->
+  <section class="px-4 md:px-10 max-w-6xl mx-auto pb-20 md:pb-28">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-rv>
+      <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Réalisations de nos membres</h2>
+      <p class="text-on-surface-variant mt-3 text-lg">Un aperçu de ce que les jeunes créent quand on leur donne les bons outils et la liberté d'oser.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[560px]" data-rv>
+        <div class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
+          <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=900&q=80" alt="Jeu vidéo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Créé par un membre</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Jeu vidéo</h4>
+          </div>
+        </div>
+        <div class="md:col-span-2 md:row-span-1 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
+          <img src="https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&w=900&q=80" alt="Robot maison" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Atelier IA & électronique</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Robot maison</h4>
+          </div>
+        </div>
+        <div class="md:col-span-1 md:row-span-1 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
+          <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=900&q=80" alt="Identité de marque" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Projet de design</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Identité de marque</h4>
+          </div>
+        </div>
+        <div class="md:col-span-1 md:row-span-1 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
+          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=900&q=80" alt="Court-métrage" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Montage & effets</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Court-métrage</h4>
+          </div>
+        </div>
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section class="px-4 md:px-10 pb-8">
-    <div class="max-w-5xl mx-auto bg-gradient-to-br from-primary via-primary-container to-secondary rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl" data-rv>
-      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
+  <section class="px-4 md:px-10 pb-12">
+    <div class="max-w-4xl mx-auto bg-surface-container-low border border-surface-variant rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)]" data-rv>
+      <div class="absolute -top-20 -right-12 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-12 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       <div class="relative z-10 space-y-6 max-w-xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white">Prêt à commencer l'exploration ?</h2>
-        <p class="text-white/90 text-lg">Une seule adhésion débloque ce domaine et les 8 autres. Toute l'année, à ton rythme.</p>
-        <a href="/membership" class="inline-block bg-white text-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-on-background leading-tight">Prêt à commencer l'exploration ?</h2>
+        <p class="text-on-surface-variant text-lg">Une seule adhésion débloque ce domaine et les 8 autres. Toute l'année, à ton rythme.</p>
+        <a href="/membership" class="inline-block bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
       </div>
     </div>
   </section>
@@ -217,5 +264,18 @@
 <script>
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('[data-rv]').forEach((el,i)=>{el.style.transitionDelay=(i%3)*70+'ms';io.observe(el);});
+  document.querySelectorAll('[data-hscroll]').forEach((el)=>{
+    const DEAD=0.16, MAX=18; let vx=0;
+    document.addEventListener('mousemove',(e)=>{
+      const r=el.getBoundingClientRect();
+      const inside=e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;
+      if(!inside){vx=0;return;}
+      const c=(e.clientX-r.left)/r.width-0.5;
+      if(Math.abs(c)<DEAD){vx=0;return;}
+      const mag=(Math.abs(c)-DEAD)/(0.5-DEAD);
+      vx=Math.sign(c)*mag*mag*MAX;
+    },{passive:true});
+    (function loop(){ if(Math.abs(vx)>0.2) el.scrollLeft+=vx; requestAnimationFrame(loop); })();
+  });
 </script>
 </body></html>

@@ -49,6 +49,13 @@
   }
   .white-neat-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0,0,0,.08); border-color: #ff6b6b; }
   .curved-edge { border-radius: 2rem; }
+  .course-card { background:#fff; border:1px solid #dae2fd; box-shadow:0 10px 25px -5px rgba(15,23,42,.05); transition:transform .4s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .3s; }
+  .course-card:hover { border-color:#004ac6; box-shadow:0 18px 40px -12px rgba(15,23,42,.12); transform:translateY(-6px); }
+  .no-scrollbar::-webkit-scrollbar { display:none; }
+  .no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+  .stagger-card { position:absolute; top:50%; left:50%; width:min(92%,540px); background:#fff; border:1px solid #dae2fd; border-radius:1.5rem; padding:2rem 2.25rem; box-shadow:0 24px 55px -15px rgba(15,23,42,.18); transition:transform .6s cubic-bezier(.16,1,.3,1), opacity .55s ease, filter .55s ease; will-change:transform,opacity; }
+  .stg-dot { width:8px; height:8px; border-radius:9999px; background:#c3c6d7; border:none; cursor:pointer; padding:0; transition:width .3s ease, background .3s ease; }
+  .stg-dot[aria-current="true"] { width:26px; background:#004ac6; }
   .soft-pill { border-radius: 100px; transition: transform .3s ease, box-shadow .3s ease; }
   .soft-pill:hover { transform: scale(1.04); }
 
@@ -187,107 +194,59 @@
     </div>
   </section>
 
-  <!-- ============ 9 TRAINS DE COMPÉTENCES ============ -->
-  <section id="competences" class="px-4 md:px-10 max-w-6xl mx-auto space-y-12 scroll-mt-28">
+  <!-- ============ 9 TRAINS DE COMPÉTENCES (carousel) ============ -->
+  <section id="competences" class="px-4 md:px-10 max-w-6xl mx-auto space-y-10 scroll-mt-28">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6" data-rv>
       <div class="max-w-xl">
         <p class="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2">9 Trains de Compétences</p>
         <h3 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Choisis ton terrain.</h3>
         <p class="text-on-surface-variant mt-2 text-lg">Une adhésion = accès à tous.</p>
       </div>
-      <a class="text-secondary font-bold flex items-center gap-2 hover:underline" href="/competences">Tout voir <span class="material-symbols-outlined">arrow_forward</span></a>
+      <div class="flex items-center gap-4">
+        <a class="text-secondary font-bold flex items-center gap-2 hover:underline whitespace-nowrap" href="/competences">Tout voir <span class="material-symbols-outlined">arrow_forward</span></a>
+        <div class="hidden sm:flex gap-2">
+          <button onclick="document.getElementById('comp-carousel').scrollBy({left:-320,behavior:'smooth'})" aria-label="Précédent" class="w-11 h-11 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+          <button onclick="document.getElementById('comp-carousel').scrollBy({left:320,behavior:'smooth'})" aria-label="Suivant" class="w-11 h-11 rounded-full border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
+        </div>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- 01 -->
-      <a href="/competences/pensee-creative" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center"><span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;">lightbulb</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">01</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Pensée Créative</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Imaginer et innover</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-secondary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+    <div id="comp-carousel" class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth" data-rv>
+      <a href="/competences/pensee-creative" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=640&q=75" alt="Pensée Créative" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-secondary">01</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-secondary text-xl" style="font-variation-settings:'FILL' 1;">lightbulb</span><h4 class="text-lg font-bold text-on-background leading-tight">Pensée Créative</h4></div><p class="text-on-surface-variant text-sm">Imaginer et innover</p><span class="mt-3 inline-flex items-center gap-1.5 text-secondary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 02 -->
-      <a href="/competences/intelligence-artificielle" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center"><span class="material-symbols-outlined text-tertiary" style="font-variation-settings:'FILL' 1;">smart_toy</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">02</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Intelligence Artificielle</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Comprendre l'IA et l'automatisation</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-tertiary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/intelligence-artificielle" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=640&q=75" alt="Intelligence Artificielle" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-tertiary">02</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings:'FILL' 1;">smart_toy</span><h4 class="text-lg font-bold text-on-background leading-tight">Intelligence Artificielle</h4></div><p class="text-on-surface-variant text-sm">Comprendre l'IA et l'automatisation</p><span class="mt-3 inline-flex items-center gap-1.5 text-tertiary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 03 -->
-      <a href="/competences/programmation-technologie" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">code</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">03</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Programmation &amp; Technologie</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Créer des solutions digitales</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-primary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/programmation-technologie" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=640&q=75" alt="Programmation & Technologie" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-primary">03</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1;">code</span><h4 class="text-lg font-bold text-on-background leading-tight">Programmation &amp; Technologie</h4></div><p class="text-on-surface-variant text-sm">Créer des solutions digitales</p><span class="mt-3 inline-flex items-center gap-1.5 text-primary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 04 -->
-      <a href="/competences/communication" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center"><span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;">forum</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">04</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Communication</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Collaborer et partager ses idées</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-secondary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/communication" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=640&q=75" alt="Communication" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-secondary">04</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-secondary text-xl" style="font-variation-settings:'FILL' 1;">forum</span><h4 class="text-lg font-bold text-on-background leading-tight">Communication</h4></div><p class="text-on-surface-variant text-sm">Collaborer et partager ses idées</p><span class="mt-3 inline-flex items-center gap-1.5 text-secondary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 05 -->
-      <a href="/competences/donnees-analyse" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center"><span class="material-symbols-outlined text-tertiary" style="font-variation-settings:'FILL' 1;">bar_chart</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">05</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Données, Analyse &amp; Sécurité</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Comprendre et exploiter les données</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-tertiary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/donnees-analyse" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=640&q=75" alt="Données, Analyse & Sécurité" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-tertiary">05</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings:'FILL' 1;">bar_chart</span><h4 class="text-lg font-bold text-on-background leading-tight">Données, Analyse &amp; Sécurité</h4></div><p class="text-on-surface-variant text-sm">Comprendre et exploiter les données</p><span class="mt-3 inline-flex items-center gap-1.5 text-tertiary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 06 -->
-      <a href="/competences/leadership" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">groups</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">06</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Leadership</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Inspirer et guider les autres</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-primary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/leadership" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=640&q=75" alt="Leadership" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-primary">06</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1;">groups</span><h4 class="text-lg font-bold text-on-background leading-tight">Leadership</h4></div><p class="text-on-surface-variant text-sm">Inspirer et guider les autres</p><span class="mt-3 inline-flex items-center gap-1.5 text-primary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 07 -->
-      <a href="/competences/entrepreneuriat" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center"><span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">07</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Entrepreneuriat</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Créer des opportunités et innover</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-secondary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/entrepreneuriat" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=640&q=75" alt="Entrepreneuriat" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-secondary">07</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-secondary text-xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span><h4 class="text-lg font-bold text-on-background leading-tight">Entrepreneuriat</h4></div><p class="text-on-surface-variant text-sm">Créer des opportunités et innover</p><span class="mt-3 inline-flex items-center gap-1.5 text-secondary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 08 -->
-      <a href="/competences/creativite-digitale" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center"><span class="material-symbols-outlined text-tertiary" style="font-variation-settings:'FILL' 1;">palette</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">08</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Créativité Digitale</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">Associer technologie et imagination</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-tertiary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/creativite-digitale" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=640&q=75" alt="Créativité Digitale" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-tertiary">08</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings:'FILL' 1;">palette</span><h4 class="text-lg font-bold text-on-background leading-tight">Créativité Digitale</h4></div><p class="text-on-surface-variant text-sm">Associer technologie et imagination</p><span class="mt-3 inline-flex items-center gap-1.5 text-tertiary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
-      <!-- 09 -->
-      <a href="/competences/apprentissage-continu" class="white-neat-card p-7 curved-edge group block" data-rv>
-        <div class="flex items-center justify-between mb-5">
-          <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">school</span></div>
-          <span class="text-3xl font-extrabold text-surface-variant">09</span>
-        </div>
-        <h4 class="text-xl font-bold text-on-background">Apprentissage Continu</h4>
-        <p class="text-on-surface-variant mt-1.5 text-sm">S'adapter et apprendre en permanence</p>
-        <span class="mt-4 inline-flex items-center gap-1.5 text-primary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span>
+      <a href="/competences/apprentissage-continu" class="course-card rounded-2xl overflow-hidden min-w-[270px] max-w-[280px] shrink-0 snap-start group block">
+        <div class="relative h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=640&q=75" alt="Apprentissage Continu" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /><span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-extrabold text-primary">09</span></div>
+        <div class="p-6"><div class="flex items-center gap-2 mb-1.5"><span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1;">school</span><h4 class="text-lg font-bold text-on-background leading-tight">Apprentissage Continu</h4></div><p class="text-on-surface-variant text-sm">S'adapter et apprendre en permanence</p><span class="mt-3 inline-flex items-center gap-1.5 text-primary font-bold text-sm group-hover:gap-2.5 transition-all">Explorer <span class="material-symbols-outlined text-base">east</span></span></div>
       </a>
     </div>
   </section>
@@ -295,51 +254,53 @@
   <!-- ============ TÉMOIGNAGES ============ -->
   <section class="bg-surface-container py-20 px-4 md:px-10 relative overflow-hidden">
     <div class="creative-blob blob-2 opacity-10" style="bottom:-20%; left:50%;"></div>
-    <div class="max-w-6xl mx-auto space-y-12 relative">
-      <h3 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight text-center" data-rv>Ils en parlent mieux que nous.</h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <figure class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex gap-1 text-tertiary mb-4">
-            <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span>
-          </div>
-          <blockquote class="text-on-background font-medium leading-relaxed">« Ma fille a créé son chatbot IA en une semaine. Elle ne veut plus partir ! »</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3">
-            <span class="w-10 h-10 rounded-full bg-secondary/15 text-secondary font-bold grid place-items-center">SM</span>
-            <span><span class="block font-bold text-sm text-on-background">Sarah M.</span><span class="block text-xs text-on-surface-variant">Parent — 12 ans</span></span>
+    <div class="max-w-5xl mx-auto relative">
+      <h3 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight text-center mb-12 md:mb-16" data-rv>Ils en parlent mieux que nous.</h3>
+
+      <div id="stagger" class="relative h-[400px] sm:h-[330px]" data-rv>
+        <article class="stagger-card">
+          <div class="flex gap-1 text-tertiary mb-4"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span></div>
+          <blockquote class="text-xl md:text-2xl font-medium leading-snug text-on-background">« Ma fille a créé son chatbot IA en une semaine. Elle ne veut plus partir ! »</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="w-12 h-12 rounded-full bg-secondary/15 text-secondary font-bold grid place-items-center">SM</span>
+            <span><span class="block font-bold text-on-background">Sarah M.</span><span class="block text-sm text-on-surface-variant">Parent — 12 ans</span></span>
           </figcaption>
-        </figure>
-        <figure class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex gap-1 text-tertiary mb-4">
-            <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span>
-          </div>
-          <blockquote class="text-on-background font-medium leading-relaxed">« Je viens après l'école, je code mon jeu. Les mentors gèrent. »</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3">
-            <span class="w-10 h-10 rounded-full bg-primary/15 text-primary font-bold grid place-items-center">LK</span>
-            <span><span class="block font-bold text-sm text-on-background">Leo K.</span><span class="block text-xs text-on-surface-variant">Membre — 14 ans</span></span>
+        </article>
+        <article class="stagger-card">
+          <div class="flex gap-1 text-tertiary mb-4"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span></div>
+          <blockquote class="text-xl md:text-2xl font-medium leading-snug text-on-background">« Je viens après l'école, je code mon jeu. Les mentors gèrent. »</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="w-12 h-12 rounded-full bg-primary/15 text-primary font-bold grid place-items-center">LK</span>
+            <span><span class="block font-bold text-on-background">Leo K.</span><span class="block text-sm text-on-surface-variant">Membre — 14 ans</span></span>
           </figcaption>
-        </figure>
-        <figure class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="flex gap-1 text-tertiary mb-4">
-            <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1;">star</span>
-          </div>
-          <blockquote class="text-on-background font-medium leading-relaxed">« Environnement sûr, vraies compétences. On adore. »</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3">
-            <span class="w-10 h-10 rounded-full bg-tertiary/15 text-tertiary font-bold grid place-items-center">DT</span>
-            <span><span class="block font-bold text-sm text-on-background">David T.</span><span class="block text-xs text-on-surface-variant">Parent — 10 ans</span></span>
+        </article>
+        <article class="stagger-card">
+          <div class="flex gap-1 text-tertiary mb-4"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span></div>
+          <blockquote class="text-xl md:text-2xl font-medium leading-snug text-on-background">« Environnement sûr, vraies compétences. On adore. »</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="w-12 h-12 rounded-full bg-tertiary/15 text-tertiary font-bold grid place-items-center">DT</span>
+            <span><span class="block font-bold text-on-background">David T.</span><span class="block text-sm text-on-surface-variant">Parent — 10 ans</span></span>
           </figcaption>
-        </figure>
+        </article>
+      </div>
+
+      <div class="flex items-center justify-center gap-5 mt-10">
+        <button id="stg-prev" aria-label="Précédent" class="w-12 h-12 rounded-full bg-white border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors shadow-sm"><span class="material-symbols-outlined">arrow_back</span></button>
+        <div id="stg-dots" class="flex items-center gap-2"></div>
+        <button id="stg-next" aria-label="Suivant" class="w-12 h-12 rounded-full bg-white border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors shadow-sm"><span class="material-symbols-outlined">arrow_forward</span></button>
       </div>
     </div>
   </section>
 
   <!-- ============ CTA ============ -->
   <section class="px-4 md:px-10 pb-8">
-    <div class="max-w-6xl mx-auto bg-gradient-to-br from-primary via-primary-container to-secondary rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden shadow-2xl" data-rv>
-      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
+    <div class="max-w-6xl mx-auto bg-surface-container-low border border-surface-variant rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)]" data-rv>
+      <div class="absolute -top-20 -right-12 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-12 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       <div class="relative z-10 space-y-6 max-w-2xl mx-auto">
-        <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight">Rejoignez la prochaine génération de créateurs.</h2>
-        <p class="text-white/90 text-lg">Offrez à votre enfant les outils, l'espace et les conseils pour construire l'avenir. Les places sont limitées.</p>
-        <a href="/membership" class="inline-block bg-white text-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-transform active:scale-95">Devenir Membre Aujourd'hui</a>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-on-background leading-tight">Rejoignez la prochaine génération de créateurs.</h2>
+        <p class="text-on-surface-variant text-lg">Offrez à votre enfant les outils, l'espace et les conseils pour construire l'avenir. Les places sont limitées.</p>
+        <a href="/membership" class="inline-block bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-transform active:scale-95">Devenir Membre Aujourd'hui</a>
       </div>
     </div>
   </section>
@@ -417,6 +378,71 @@
     es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-rv]').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
+
+  /* ---- Carousel: hover-to-scroll (move mouse left/right, no click) ---- */
+  (function () {
+    const el = document.getElementById('comp-carousel');
+    if (!el) return;
+    const DEAD = 0.16;   // central no-scroll zone (fraction of width from center)
+    const MAX = 18;      // max scroll speed (px per frame)
+    let vx = 0;
+    // Listen on the whole document and test if the cursor is inside the carousel,
+    // so it works regardless of mouseenter/hover quirks (e.g. touch-capable laptops).
+    document.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      if (!inside) { vx = 0; return; }
+      const c = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
+      if (Math.abs(c) < DEAD) { vx = 0; return; }
+      const mag = (Math.abs(c) - DEAD) / (0.5 - DEAD);  // 0 .. 1
+      vx = Math.sign(c) * mag * mag * MAX;              // ease-in for gentle center
+    }, { passive: true });
+    function loop() {
+      if (Math.abs(vx) > 0.2) el.scrollLeft += vx;
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  })();
+
+  /* ---- Stagger testimonials (fanned stack) ---- */
+  (function () {
+    const stage = document.getElementById('stagger');
+    if (!stage) return;
+    const cards = [...stage.querySelectorAll('.stagger-card')];
+    const n = cards.length;
+    const dotsWrap = document.getElementById('stg-dots');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let active = 0, timer = null;
+    cards.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'stg-dot'; d.setAttribute('aria-label', 'Témoignage ' + (i + 1));
+      d.addEventListener('click', () => { active = i; render(); restart(); });
+      dotsWrap.appendChild(d);
+    });
+    const dots = [...dotsWrap.children];
+    function render() {
+      cards.forEach((card, i) => {
+        let off = (i - active + n) % n;
+        if (off > n / 2) off -= n;
+        const abs = Math.abs(off);
+        const x = off * 58, rot = off * 5, ty = abs * 16, scale = 1 - abs * 0.09;
+        card.style.transform = `translate(-50%,-50%) translateX(${x}px) translateY(${ty}px) rotate(${rot}deg) scale(${scale})`;
+        card.style.zIndex = String(100 - abs);
+        card.style.opacity = abs > 1 ? '0' : (off === 0 ? '1' : '0.4');
+        card.style.filter = off === 0 ? 'none' : 'blur(1.5px)';
+        card.style.pointerEvents = off === 0 ? 'auto' : 'none';
+        if (dots[i]) dots[i].setAttribute('aria-current', off === 0 ? 'true' : 'false');
+      });
+    }
+    const go = (d) => { active = (active + d + n) % n; render(); };
+    document.getElementById('stg-next').addEventListener('click', () => { go(1); restart(); });
+    document.getElementById('stg-prev').addEventListener('click', () => { go(-1); restart(); });
+    function start() { if (!reduce) timer = setInterval(() => go(1), 5000); }
+    function restart() { clearInterval(timer); start(); }
+    stage.addEventListener('mouseenter', () => clearInterval(timer));
+    stage.addEventListener('mouseleave', start);
+    render(); start();
+  })();
 </script>
 </body>
 </html>

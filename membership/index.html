@@ -27,6 +27,10 @@
   .curved-edge{border-radius:2rem;}
   .soft-pill{border-radius:100px;transition:transform .3s ease,box-shadow .3s ease;}
   .soft-pill:hover{transform:scale(1.04);}
+  .course-card{background:#fff;border:1px solid #dae2fd;box-shadow:0 10px 25px -5px rgba(15,23,42,.05);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;}
+  .course-card:hover{border-color:#004ac6;box-shadow:0 18px 40px -12px rgba(15,23,42,.12);transform:translateY(-4px);}
+  .no-scrollbar::-webkit-scrollbar{display:none;}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
   .blob-animate{animation:blob 18s infinite alternate cubic-bezier(.45,0,.55,1);}
   @keyframes blob{0%{transform:translate(0,0) scale(1) rotate(0)}100%{transform:translate(18px,-26px) scale(1.12) rotate(10deg)}}
   [data-rv]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
@@ -51,58 +55,84 @@
   <a href="/membership" class="hidden md:inline-block bg-primary text-on-primary px-6 py-2.5 soft-pill text-sm font-bold shadow-md hover:shadow-xl active:scale-95">Devenir Membre</a>
 </header>
 <main class="pt-24 md:pt-28">
-  <section class="px-4 md:px-10 max-w-3xl mx-auto text-center py-12 md:py-16 space-y-5">
-    <span class="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest">Adhésion</span>
-    <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">Devenir <span class="text-primary italic">Membre</span></h1>
-    <p class="text-lg text-on-surface-variant">Une seule adhésion. Tous les Trains de Compétences débloqués. Toute l'année.</p>
-  </section>
-  <section class="px-4 md:px-10 pb-8">
-    <div class="max-w-xl mx-auto white-neat-card curved-edge p-8 md:p-10 text-center" data-rv>
-      <span class="inline-block px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-widest mb-6">Offre unique — Tout inclus</span>
-      <p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wide">Adhésion Annuelle</p>
-      <div class="flex items-end justify-center gap-1 mt-2"><span class="text-6xl md:text-7xl font-extrabold text-on-background">250</span><span class="text-2xl font-bold text-on-surface-variant mb-2">€ / an</span></div>
-      <p class="text-sm text-on-surface-variant mt-1">Soit moins de 21 € par mois.</p>
-      <ul class="text-left space-y-3 mt-8 max-w-md mx-auto"><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Accès illimité 7j/7 au labo</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Les 9 Trains de Compétences inclus</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Mentorat individuel par nos experts</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Outils d'IA avancés (sécurisés)</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Création d'un portfolio de projets</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Ateliers exclusifs le week-end</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Stage professionnel garanti</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Attestation officielle valorisable sur Parcoursup</span></li></ul>
-      <a href="/contact" class="mt-8 inline-block bg-primary text-on-primary px-10 py-4 soft-pill font-bold shadow-md hover:shadow-xl active:scale-95">Devenir Membre — 250 € / an</a>
+  <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center py-10 md:py-16">
+    <div class="space-y-5">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest">Adhésion</span>
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">Devenir <span class="text-primary italic">Membre</span></h1>
+      <p class="text-lg text-on-surface-variant">Une seule adhésion. Tous les Trains de Compétences débloqués. Toute l'année.</p>
+    </div>
+    <div class="relative">
+      <div class="absolute -inset-6 bg-gradient-to-br from-secondary via-tertiary to-primary rounded-full blur-3xl opacity-25 blob-animate"></div>
+      <img src="/videos/membership.webp" alt="Devenir Membre" class="relative w-full h-[300px] md:h-[420px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl" />
     </div>
   </section>
+  <!-- Garantie Stage (full width) -->
   <section class="bg-surface-container py-20 md:py-28 px-4 md:px-10">
     <div class="max-w-6xl mx-auto">
-      <div class="max-w-2xl mb-12" data-rv>
+      <div class="max-w-2xl mx-auto text-center mb-12" data-rv>
         <span class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">Garantie Stage</span>
         <h2 class="text-3xl md:text-4xl font-bold text-on-background tracking-tight">Accompagnement Stage Professionnel Garanti</h2>
         <p class="text-on-surface-variant mt-4 text-lg leading-relaxed">Toute adhésion garantit un stage — auprès de nos partenaires, ou directement au sein de notre école si aucun stage externe n'est trouvé. Chaque membre bénéficie d'un accompagnement personnalisé pour décrocher un stage professionnel.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">handshake</span></div>
-          <h3 class="text-lg font-bold text-on-background mb-2">Réseau d'entreprises partenaires</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Startups tech, agences de développement web, studios de création de jeux vidéo, entreprises spécialisées en IA.</p>
+      <div class="flex justify-center md:justify-end mb-5">
+        <div class="hidden md:flex gap-2">
+          <button onclick="document.getElementById('gar-carousel').scrollBy({left:-320,behavior:'smooth'})" aria-label="Précédent" class="w-11 h-11 rounded-full bg-white border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+          <button onclick="document.getElementById('gar-carousel').scrollBy({left:320,behavior:'smooth'})" aria-label="Suivant" class="w-11 h-11 rounded-full bg-white border border-surface-variant grid place-items-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined">arrow_forward</span></button>
         </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">support_agent</span></div>
-          <h3 class="text-lg font-bold text-on-background mb-2">Accompagnement personnalisé</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Aide à la rédaction du CV, préparation aux entretiens, mise en relation directe avec nos partenaires.</p>
-        </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">verified</span></div>
-          <h3 class="text-lg font-bold text-on-background mb-2">Stage garanti par défaut</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Si aucun stage externe n'est trouvé, votre enfant effectue automatiquement un stage d'immersion de 1 à 2 semaines au sein de notre centre.</p>
-        </div>
-        <div class="white-neat-card p-7 curved-edge" data-rv>
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">workspace_premium</span></div>
-          <h3 class="text-lg font-bold text-on-background mb-2">Attestation officielle</h3>
-          <p class="text-sm text-on-surface-variant leading-relaxed">Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires.</p>
-        </div></div>
+      </div>
+      <div id="gar-carousel" data-hscroll class="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth">
+        <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
+          <div class="h-40 overflow-hidden"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="Réseau d'entreprises partenaires" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-on-background mb-2">Réseau d'entreprises partenaires</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Startups tech, agences de développement web, studios de création de jeux vidéo, entreprises spécialisées en IA.</p>
+          </div>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
+          <div class="h-40 overflow-hidden"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Accompagnement personnalisé" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-on-background mb-2">Accompagnement personnalisé</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Aide à la rédaction du CV, préparation aux entretiens, mise en relation directe avec nos partenaires.</p>
+          </div>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
+          <div class="h-40 overflow-hidden"><img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=900&q=80" alt="Stage garanti par défaut" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-on-background mb-2">Stage garanti par défaut</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Si aucun stage externe n'est trouvé, votre enfant effectue automatiquement un stage d'immersion de 1 à 2 semaines au sein de notre centre.</p>
+          </div>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
+          <div class="h-40 overflow-hidden"><img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=80" alt="Attestation officielle" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-on-background mb-2">Attestation officielle</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires.</p>
+          </div>
+        </article>
+        <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
+          <div class="h-40 overflow-hidden"><img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=900&q=80" alt="Anglais inclus & gratuit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-on-background mb-2">Anglais inclus & gratuit</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Sessions de conversation et d'apprentissage de l'anglais comprises dans l'adhésion — entièrement gratuites.</p>
+          </div>
+        </article></div>
+      <p class="text-center text-on-surface-variant mt-12 text-sm" data-rv>Une question, ou besoin d'une solution pour une école ou un groupe ? <a href="/contact" class="text-primary font-semibold hover:underline">Contactez-nous</a></p>
     </div>
   </section>
-  <section class="px-4 md:px-10 py-16">
-    <div class="max-w-5xl mx-auto bg-gradient-to-br from-primary via-primary-container to-secondary rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl" data-rv>
-      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
-      <div class="relative z-10 space-y-6 max-w-xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white">Une question avant de rejoindre ?</h2>
-        <p class="text-white/90 text-lg">Besoin d'une solution pour une école ou un groupe ? Parlons-en.</p>
-        <a href="/contact" class="inline-block bg-white text-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-transform active:scale-95">Nous Contacter</a>
+
+  <!-- Offre unique (full width) -->
+  <section class="px-4 md:px-10 py-16 md:py-24">
+    <div class="max-w-6xl mx-auto rounded-[2rem] overflow-hidden border border-surface-variant shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)] grid md:grid-cols-2" data-rv>
+      <div class="p-8 md:p-12 bg-surface-container-low flex flex-col justify-center">
+        <span class="inline-block self-start px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-widest mb-6">Offre unique — Tout inclus</span>
+        <p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wide">Adhésion Annuelle</p>
+        <div class="flex items-end gap-1 mt-2"><span class="text-6xl md:text-7xl font-extrabold text-on-background">250</span><span class="text-2xl font-bold text-on-surface-variant mb-2">€ / an</span></div>
+        <p class="text-sm text-on-surface-variant mt-1">Soit moins de 21 € par mois.</p>
+        <a href="/contact" class="mt-8 inline-block bg-primary text-on-primary px-10 py-4 soft-pill font-bold shadow-md hover:shadow-xl active:scale-95 text-center">Devenir Membre — 250 € / an</a>
+      </div>
+      <div class="p-8 md:p-12 bg-white">
+        <h3 class="text-lg font-bold text-on-background mb-6">Tout ce qui est inclus</h3>
+        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3.5"><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Accès illimité 7j/7 au labo</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Les 9 Trains de Compétences inclus</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Mentorat individuel par nos experts</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Outils d'IA avancés (sécurisés)</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Création d'un portfolio de projets</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Ateliers exclusifs le week-end</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Stage professionnel garanti</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">Attestation officielle valorisable sur Parcoursup</span></li></ul>
       </div>
     </div>
   </section>
@@ -152,5 +182,18 @@
 </footer><script>
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('[data-rv]').forEach((el,i)=>{el.style.transitionDelay=(i%3)*70+'ms';io.observe(el);});
+  document.querySelectorAll('[data-hscroll]').forEach((el)=>{
+    const DEAD=0.16, MAX=18; let vx=0;
+    document.addEventListener('mousemove',(e)=>{
+      const r=el.getBoundingClientRect();
+      const inside=e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;
+      if(!inside){vx=0;return;}
+      const c=(e.clientX-r.left)/r.width-0.5;
+      if(Math.abs(c)<DEAD){vx=0;return;}
+      const mag=(Math.abs(c)-DEAD)/(0.5-DEAD);
+      vx=Math.sign(c)*mag*mag*MAX;
+    },{passive:true});
+    (function loop(){ if(Math.abs(vx)>0.2) el.scrollLeft+=vx; requestAnimationFrame(loop); })();
+  });
 </script>
 </body></html>
