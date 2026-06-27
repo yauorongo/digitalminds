@@ -287,15 +287,15 @@ const titleHtml = (c) => c.title === c.accent
 
 const U = (id,w=900) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 const PIC = {
-  creative:'1499951360447-b19be8fe80f5', brainstorm:'1531545514256-b1400bc00f31',
+  creative:'1503454537195-1dcabb73ffb9', brainstorm:'1509062522246-3755977927d7',
   robot:'1485827404703-89b55fcc595e', coding:'1517694712202-14dd9538aa97',
   coding2:'1555066931-4365d14bab8c', kid_tech:'1587620962725-abab7fe55159',
-  teamwork:'1522071820081-009f0129c71c', data:'1551288049-bebda4e38f71',
-  data2:'1460925895917-afdab827c52f', leadership:'1552664730-d307ca884978',
-  entrepren:'1559136555-9303baea8ebd', design:'1561070791-2526d30994b5',
-  design2:'1558655146-9f40138edfeb', learning:'1503676260728-1c00da094a0b',
+  teamwork:'1571260899304-425eee4c7efc', data:'1551288049-bebda4e38f71',
+  data2:'1460925895917-afdab827c52f', leadership:'1567057419565-4349c49d8a04',
+  entrepren:'1509062522246-3755977927d7', design:'1503454537195-1dcabb73ffb9',
+  design2:'1558655146-9f40138edfeb', learning:'1546410531-bb4caa6b424d',
   robotics:'1535378620166-273708d44e4c', video_edit:'1574717024653-61fd2cf4d44d',
-  study:'1497633762265-9d179a990aa6',
+  study:'1599058917765-a780eda07a3e',
   dc_aisle:'1558494949-ef010cbdcc31', dc_hall:'1597733336794-12d05021d510',
   server_room:'1544197150-b99a580bb7a8', cloud_tech:'1484557052118-f32bd25b45b5',
   circuit:'1518770660439-4636190af475', network_earth:'1451187580459-43490279c0fa',
@@ -512,11 +512,11 @@ function buildMembership() {
     "Attestation officielle valorisable sur Parcoursup",
   ].map(t=>`<li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant">${t}</span></li>`).join('');
   const guarantees = [
-    ["1522071820081-009f0129c71c","Réseau d'entreprises partenaires","Startups tech, agences de développement web, studios de création de jeux vidéo, entreprises spécialisées en IA."],
-    ["1552664730-d307ca884978","Accompagnement personnalisé","Aide à la rédaction du CV, préparation aux entretiens, mise en relation directe avec nos partenaires."],
+    ["1571260899304-425eee4c7efc","Réseau d'entreprises partenaires","Startups tech, agences de développement web, studios de création de jeux vidéo, entreprises spécialisées en IA."],
+    ["1567057419565-4349c49d8a04","Accompagnement personnalisé","Aide à la rédaction du CV, préparation aux entretiens, mise en relation directe avec nos partenaires."],
     ["1587620962725-abab7fe55159","Stage garanti par défaut","Si aucun stage externe n'est trouvé, votre enfant effectue automatiquement un stage d'immersion de 1 à 2 semaines au sein de notre centre."],
-    ["1497633762265-9d179a990aa6","Attestation officielle","Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires."],
-    ["1531545514256-b1400bc00f31","Anglais inclus & gratuit","Sessions de conversation et d'apprentissage de l'anglais comprises dans l'adhésion — entièrement gratuites."],
+    ["1599058917765-a780eda07a3e","Attestation officielle","Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires."],
+    ["1509062522246-3755977927d7","Anglais inclus & gratuit","Sessions de conversation et d'apprentissage de l'anglais comprises dans l'adhésion — entièrement gratuites."],
   ].map(([img,t,d])=>`
         <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
           <div class="h-40 overflow-hidden"><img src="${U(img)}" alt="${t}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
