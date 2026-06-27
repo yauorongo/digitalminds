@@ -3,6 +3,9 @@
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
+## Git & Commits
+- **Never run `git commit` or `git push` (or otherwise change git state) without explicit approval.** Make the requested changes, show/verify them, then ask before committing or deploying. Auto-committing is not allowed.
+
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
 - If no reference image: design from scratch with high craft (see guardrails below).

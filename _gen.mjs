@@ -287,15 +287,15 @@ const titleHtml = (c) => c.title === c.accent
 
 const U = (id,w=900) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 const PIC = {
-  creative:'1503454537195-1dcabb73ffb9', brainstorm:'1509062522246-3755977927d7',
+  creative:'1516534775068-ba3e7458af70', brainstorm:'1509062522246-3755977927d7',
   robot:'1485827404703-89b55fcc595e', coding:'1517694712202-14dd9538aa97',
   coding2:'1555066931-4365d14bab8c', kid_tech:'1587620962725-abab7fe55159',
   teamwork:'1571260899304-425eee4c7efc', data:'1551288049-bebda4e38f71',
   data2:'1460925895917-afdab827c52f', leadership:'1567057419565-4349c49d8a04',
-  entrepren:'1509062522246-3755977927d7', design:'1503454537195-1dcabb73ffb9',
+  entrepren:'1509062522246-3755977927d7', design:'1516534775068-ba3e7458af70',
   design2:'1558655146-9f40138edfeb', learning:'1546410531-bb4caa6b424d',
   robotics:'1535378620166-273708d44e4c', video_edit:'1574717024653-61fd2cf4d44d',
-  study:'1599058917765-a780eda07a3e',
+  study:'1581726707445-75cbe4efc586',
   dc_aisle:'1558494949-ef010cbdcc31', dc_hall:'1597733336794-12d05021d510',
   server_room:'1544197150-b99a580bb7a8', cloud_tech:'1484557052118-f32bd25b45b5',
   circuit:'1518770660439-4636190af475', network_earth:'1451187580459-43490279c0fa',
@@ -515,7 +515,7 @@ function buildMembership() {
     ["1571260899304-425eee4c7efc","Réseau d'entreprises partenaires","Startups tech, agences de développement web, studios de création de jeux vidéo, entreprises spécialisées en IA."],
     ["1567057419565-4349c49d8a04","Accompagnement personnalisé","Aide à la rédaction du CV, préparation aux entretiens, mise en relation directe avec nos partenaires."],
     ["1587620962725-abab7fe55159","Stage garanti par défaut","Si aucun stage externe n'est trouvé, votre enfant effectue automatiquement un stage d'immersion de 1 à 2 semaines au sein de notre centre."],
-    ["1599058917765-a780eda07a3e","Attestation officielle","Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires."],
+    ["1581726707445-75cbe4efc586","Attestation officielle","Document valorisable sur Parcoursup, le CV et auprès des établissements scolaires."],
     ["1509062522246-3755977927d7","Anglais inclus & gratuit","Sessions de conversation et d'apprentissage de l'anglais comprises dans l'adhésion — entièrement gratuites."],
   ].map(([img,t,d])=>`
         <article class="course-card rounded-xl overflow-hidden min-w-[270px] max-w-[290px] shrink-0 group">
