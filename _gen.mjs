@@ -70,18 +70,18 @@ const data = [
     ],
     bullets:["Prendre des décisions éclairées plutôt que par intuition","Repérer les manipulations de chiffres dans l'actualité","Acquérir une compétence très recherchée par les entreprises","Renforcer ses résultats en mathématiques de manière concrète"] },
 
-  { slug:'leadership', num:'06', title:'Leadership', accent:'Leadership', sub:'Inspirer et guider les autres', icon:'groups', color:'primary',
-    intro:"Le leadership ne s'improvise pas, il se cultive. Chez DigitalMinds, les jeunes prennent tour à tour la responsabilité d'un mini-projet : organiser, motiver, décider et assumer — autant de compétences qui forgent la personnalité.",
-    why:"Pourquoi apprendre à inspirer et guider les autres avec nous ?",
+  { slug:'leadership', num:'06', title:'Cloud & Data Centers', accent:'Data Centers', sub:'Comprendre le cloud et les centres de données', icon:'cloud', color:'primary',
+    intro:"Tout ce que nous utilisons en ligne — jeux, vidéos, réseaux, IA — tourne quelque part : dans le cloud et d'immenses centres de données. Nos jeunes découvrent cette infrastructure invisible qui fait tourner le monde numérique, comment on y stocke et sécurise l'information, et comment y mettre leurs propres projets en ligne.",
+    why:"Pourquoi apprendre le cloud et les centres de données avec nous ?",
     topics:[
-      ['Confiance en Soi',"Exercices et défis progressifs pour oser prendre la parole et défendre ses idées."],
-      ['Motiver une Équipe',"Apprendre à embarquer les autres autour d'une vision commune et engageante."],
-      ['Prendre des Décisions',"Cadres simples pour choisir entre plusieurs options sans rester bloqué."],
-      ['Gérer les Conflits',"Apprendre à écouter, à reformuler et à trouver des compromis dans une équipe."],
-      ['Servant Leadership',"Découvrir que le meilleur leader est celui qui aide son équipe à briller."],
-      ['Modèles Inspirants',"Étudier des parcours de leaders tech, sportifs, scientifiques et entrepreneurs."],
+      ["Le Cloud, c'est quoi ?","Comprendre où vivent réellement nos fichiers, applis et jeux préférés."],
+      ['Stockage & Serveurs',"Découvrir comment les données sont stockées, dupliquées et protégées sur d'immenses serveurs."],
+      ['Centres de Données',"Explorer (virtuellement) ces bâtiments géants qui font tourner Internet, jour et nuit."],
+      ['Mettre en Ligne un Projet',"Héberger son propre site ou son appli pour le rendre accessible partout dans le monde."],
+      ['Sécurité & Sauvegarde',"Apprendre à protéger ses données, gérer les accès et ne jamais rien perdre."],
+      ['Énergie & Écologie',"Comprendre la consommation des data centers et les enjeux d'un numérique plus responsable."],
     ],
-    bullets:["Oser prendre des initiatives à l'école comme à la maison","Devenir un référent positif pour ses camarades","Apprendre à gérer le stress des responsabilités","Construire une posture forte pour l'avenir personnel et pro"] },
+    bullets:["Comprendre l'infrastructure qui fait tourner toute la tech","Acquérir des bases très recherchées (cloud, hébergement, réseaux)","Apprendre à mettre ses projets en ligne, pour de vrai","Adopter de bons réflexes de sécurité et de sauvegarde"] },
 
   { slug:'entrepreneuriat', num:'07', title:'Entrepreneuriat', accent:'Entrepreneuriat', sub:'Créer des opportunités et innover', icon:'rocket_launch', color:'secondary',
     intro:"Entreprendre, c'est passer de « j'ai une idée » à « j'ai lancé quelque chose ». Nos jeunes apprennent à détecter un vrai besoin, à concevoir une mini-offre, à la tester auprès d'utilisateurs et à itérer — comme une vraie startup.",
@@ -201,7 +201,7 @@ const footer = `<footer class="bg-surface-container-low border-t border-surface-
         <li><a href="/competences/programmation-technologie" class="hover:text-secondary transition-colors">Programmation &amp; Technologie</a></li>
         <li><a href="/competences/communication" class="hover:text-secondary transition-colors">Communication</a></li>
         <li><a href="/competences/donnees-analyse" class="hover:text-secondary transition-colors">Données &amp; Analyse</a></li>
-        <li><a href="/competences/leadership" class="hover:text-secondary transition-colors">Leadership</a></li>
+        <li><a href="/competences/leadership" class="hover:text-secondary transition-colors">Cloud &amp; Data Centers</a></li>
         <li><a href="/competences/entrepreneuriat" class="hover:text-secondary transition-colors">Entrepreneuriat</a></li>
         <li><a href="/competences/creativite-digitale" class="hover:text-secondary transition-colors">Créativité Digitale</a></li>
         <li><a href="/competences/apprentissage-continu" class="hover:text-secondary transition-colors">Apprentissage Continu</a></li>
@@ -264,6 +264,9 @@ const PIC = {
   design2:'1558655146-9f40138edfeb', learning:'1503676260728-1c00da094a0b',
   robotics:'1535378620166-273708d44e4c', video_edit:'1574717024653-61fd2cf4d44d',
   study:'1497633762265-9d179a990aa6',
+  dc_aisle:'1558494949-ef010cbdcc31', dc_hall:'1597733336794-12d05021d510',
+  server_room:'1544197150-b99a580bb7a8', cloud_tech:'1484557052118-f32bd25b45b5',
+  circuit:'1518770660439-4636190af475', network_earth:'1451187580459-43490279c0fa',
 };
 const media = {
   'pensee-creative':         { hero:'creative',   cards:['brainstorm','creative','design','learning','video_edit','teamwork'] },
@@ -271,7 +274,7 @@ const media = {
   'programmation-technologie':{ hero:'coding',     cards:['coding','coding2','kid_tech','robotics','design','data'] },
   'communication':           { hero:'teamwork',   cards:['teamwork','leadership','learning','study','brainstorm','video_edit'] },
   'donnees-analyse':         { hero:'data',        cards:['data','data2','coding','study','learning','teamwork'] },
-  'leadership':              { hero:'leadership',  cards:['leadership','teamwork','brainstorm','study','entrepren','learning'] },
+  'leadership':              { hero:'dc_aisle',    cards:['dc_hall','server_room','cloud_tech','coding','circuit','network_earth'] },
   'entrepreneuriat':         { hero:'entrepren',   cards:['entrepren','leadership','teamwork','design','data2','brainstorm'] },
   'creativite-digitale':     { hero:'design',      cards:['design','design2','video_edit','creative','kid_tech','robotics'] },
   'apprentissage-continu':   { hero:'learning',    cards:['learning','study','kid_tech','coding','teamwork','brainstorm'] },
@@ -288,7 +291,7 @@ const heroFile = {
   'programmation-technologie':'/videos/programmation-technologie.webp',
   'communication':'/videos/communication.webp',
   'donnees-analyse':'/videos/donnees-analyse.webp',
-  'leadership':'/videos/leadership.webp',
+  'leadership':'/videos/cloud.mp4',
   'entrepreneuriat':'/videos/entrepreneuriat.gif',
   'creativite-digitale':'/videos/creativite-digitale.webp',
   'apprentissage-continu':'/videos/apprentissage-continu.webp',
@@ -342,7 +345,9 @@ ${nav}
     </div>
     <div class="relative">
       <div class="absolute -inset-6 bg-gradient-to-br from-${c.color} via-tertiary to-primary rounded-full blur-3xl opacity-25 blob-animate"></div>
-      <img src="${heroFile[c.slug]}" alt="${c.title}" class="relative w-full h-[300px] md:h-[440px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl" />
+      ${heroFile[c.slug].endsWith('.mp4')
+        ? `<video src="${heroFile[c.slug]}" autoplay muted loop playsinline class="relative w-full h-[300px] md:h-[440px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl"></video>`
+        : `<img src="${heroFile[c.slug]}" alt="${c.title}" class="relative w-full h-[300px] md:h-[440px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl" />`}
     </div>
   </section>
 
@@ -384,13 +389,14 @@ ${nav}
 
   <!-- CTA -->
   <section class="px-4 md:px-10 pb-12">
-    <div class="max-w-4xl mx-auto bg-surface-container-low border border-surface-variant rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)]" data-rv>
-      <div class="absolute -top-20 -right-12 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-24 -left-12 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-      <div class="relative z-10 space-y-6 max-w-xl mx-auto">
-        <h2 class="text-3xl md:text-5xl font-extrabold text-on-background leading-tight">Prêt à commencer l'exploration ?</h2>
-        <p class="text-on-surface-variant text-lg">Une seule adhésion débloque ce domaine et les 8 autres. Toute l'année, à ton rythme.</p>
-        <a href="/membership" class="inline-block bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
+    <div class="max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden border border-surface-variant shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)] grid md:grid-cols-2 bg-surface-container-low" data-rv>
+      <div class="p-10 md:p-14 flex flex-col justify-center text-center md:text-left">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-on-background leading-tight">Offrez à votre enfant une longueur d'avance sur le monde de demain.</h2>
+        <p class="text-on-surface-variant text-lg mt-5">Chez DigitalMinds, il acquiert dès aujourd'hui les compétences, la confiance et les outils pour devenir un acteur du monde de l'IA. Les places sont limitées.</p>
+        <a href="/membership" class="mt-7 self-center md:self-start inline-block bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-transform active:scale-95">Devenir Membre</a>
+      </div>
+      <div class="relative min-h-[260px] md:min-h-0">
+        <img src="/videos/apprentissage-continu.webp" alt="DigitalMinds" class="absolute inset-0 w-full h-full object-cover" />
       </div>
     </div>
   </section>
@@ -556,10 +562,16 @@ function buildContact() {
 <div class="creative-blob blob-1"></div><div class="creative-blob blob-2"></div>
 ${nav}
 <main class="pt-24 md:pt-28">
-  <section class="px-4 md:px-10 max-w-3xl mx-auto text-center py-12 md:py-14 space-y-5">
-    <span class="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest">Contact</span>
-    <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">Contactez-<span class="text-primary italic">nous</span></h1>
-    <p class="text-lg text-on-surface-variant">Vous avez des questions sur nos abonnements, nos domaines d'apprentissage ou vous souhaitez planifier une visite du labo ? Nous sommes là pour vous aider.</p>
+  <section class="px-4 md:px-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center py-10 md:py-16">
+    <div class="space-y-5 text-center md:text-left">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest">Contact</span>
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">Contactez-<span class="text-primary italic">nous</span></h1>
+      <p class="text-lg text-on-surface-variant">Vous avez des questions sur nos abonnements, nos domaines d'apprentissage ou vous souhaitez planifier une visite du labo ? Nous sommes là pour vous aider.</p>
+    </div>
+    <div class="relative">
+      <div class="absolute -inset-6 bg-gradient-to-br from-secondary via-tertiary to-primary rounded-full blur-3xl opacity-25 blob-animate"></div>
+      <img src="/videos/apprentissage-continu.webp" alt="DigitalMinds" class="relative w-full h-[300px] md:h-[400px] object-cover rounded-[2.5rem] border-4 border-white shadow-2xl" />
+    </div>
   </section>
   <section class="px-4 md:px-10 max-w-6xl mx-auto pb-12 grid md:grid-cols-2 gap-8">
     <div class="space-y-5">
