@@ -4,6 +4,19 @@ import { join, dirname } from 'node:path';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 
+// Rewrite root-absolute links/sources to relative, so the site works both
+// locally and under a GitHub Pages subpath (/digitalminds/). `base` is the
+// relative path back to the site root from the page (e.g. '../../').
+function relativize(html, base) {
+  return html
+    .replace(/href="\/competences\/([a-z-]+)"/g, `href="${base}competences/$1/"`)
+    .replace(/href="\/membership"/g, `href="${base}membership/"`)
+    .replace(/href="\/contact"/g, `href="${base}contact/"`)
+    .replace(/href="\/#competences"/g, `href="${base}#competences"`)
+    .replace(/href="\/"/g, `href="${base}"`)
+    .replace(/src="\/videos\//g, `src="${base}videos/`);
+}
+
 const data = [
   { slug:'pensee-creative', num:'01', title:'Pensée Créative', accent:'Créative', sub:'Imaginer et innover', icon:'lightbulb', color:'secondary',
     intro:"La pensée créative, c'est la capacité d'imaginer ce qui n'existe pas encore. Chez DigitalMinds, les jeunes apprennent à observer le monde, à poser les bonnes questions et à inventer des solutions qui leur ressemblent — un super-pouvoir indispensable à l'ère de l'IA.",
@@ -409,7 +422,7 @@ ${reveal}
 for (const c of data) {
   const dir = join(ROOT, 'competences', c.slug);
   await mkdir(dir, { recursive: true });
-  await writeFile(join(dir, 'index.html'), buildCompetence(c), 'utf8');
+  await writeFile(join(dir, 'index.html'), relativize(buildCompetence(c), '../../'), 'utf8');
   console.log('wrote competences/' + c.slug + '/index.html');
 }
 // ---------- /competences (listing) ----------
@@ -631,7 +644,7 @@ ${footer}
 }
 
 // competences listing page removed — the 9 skills now live in the nav menu dropdown
-await mkdir(join(ROOT,'membership'),{recursive:true}); await writeFile(join(ROOT,'membership','index.html'), buildMembership(), 'utf8'); console.log('wrote membership/index.html');
-await mkdir(join(ROOT,'contact'),{recursive:true}); await writeFile(join(ROOT,'contact','index.html'), buildContact(), 'utf8'); console.log('wrote contact/index.html');
+await mkdir(join(ROOT,'membership'),{recursive:true}); await writeFile(join(ROOT,'membership','index.html'), relativize(buildMembership(), '../'), 'utf8'); console.log('wrote membership/index.html');
+await mkdir(join(ROOT,'contact'),{recursive:true}); await writeFile(join(ROOT,'contact','index.html'), relativize(buildContact(), '../'), 'utf8'); console.log('wrote contact/index.html');
 
 console.log('Done: ' + (data.length + 3) + ' pages.');
