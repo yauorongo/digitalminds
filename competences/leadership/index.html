@@ -34,6 +34,9 @@
   .bleed{width:80vw;margin-left:calc(50% - 40vw);margin-right:calc(50% - 40vw);}
   .blob-animate{animation:blob 18s infinite alternate cubic-bezier(.45,0,.55,1);}
   @keyframes blob{0%{transform:translate(0,0) scale(1) rotate(0)}100%{transform:translate(18px,-26px) scale(1.12) rotate(10deg)}}
+  .dm-wave{display:inline-block;transform-origin:72% 72%;animation:dmwave 2.6s ease-in-out infinite;}
+  @keyframes dmwave{0%,62%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%{transform:rotate(-8deg)}40%{transform:rotate(12deg)}50%{transform:rotate(-5deg)}}
+  @media (prefers-reduced-motion:reduce){.dm-wave{animation:none;}}
   [data-rv]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
   [data-rv].in{opacity:1;transform:none;}
   .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
@@ -46,7 +49,7 @@
 <header class="fixed top-0 w-full flex justify-between items-center px-4 md:px-10 py-4 bg-white/70 backdrop-blur-xl border-b border-surface-variant/50 z-50">
   <a href="../../" class="flex items-center gap-2.5">
     <div class="w-10 h-10 bg-gradient-to-br from-secondary to-tertiary rounded-xl flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div>
-    <h1 class="text-xl md:text-2xl font-bold text-on-background tracking-tight">DigitalMinds</h1>
+    <h1 class="text-xl md:text-2xl font-bold tracking-tight"><span class="text-primary">Nozay</span><span class="text-on-background">.DigitalMinds</span></h1>
   </a>
   <nav class="hidden md:flex gap-8 items-center">
     <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="../../">Accueil</a>
@@ -83,6 +86,7 @@
       <div><span class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">Comprendre le cloud et les centres de données</span></div>
       <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background"><span>Cloud & </span><span class="text-primary italic">Data Centers</span><span></span></h1>
       <p class="text-lg text-on-surface-variant leading-relaxed max-w-lg">Tout ce que nous utilisons en ligne — jeux, vidéos, réseaux, IA — tourne quelque part : dans le cloud et d'immenses centres de données. Nos jeunes découvrent cette infrastructure invisible qui fait tourner le monde numérique, comment on y stocke et sécurise l'information, et comment y mettre leurs propres projets en ligne.</p>
+      
       <div class="flex flex-wrap gap-4 pt-2">
         <a href="../../membership/" class="bg-primary text-on-primary px-8 py-4 soft-pill font-bold shadow-md hover:shadow-xl active:scale-95">Devenir Membre</a>
         <a href="../../#competences" class="bg-white border border-surface-variant text-on-background px-8 py-4 soft-pill font-bold hover:border-secondary transition-colors">Voir tous les domaines</a>
@@ -184,6 +188,7 @@
     </ul>
   </section>
 
+
   <!-- SHOWCASE -->
   <section class="px-4 md:px-10 max-w-6xl mx-auto pb-20 md:pb-28">
     <div class="text-center max-w-2xl mx-auto mb-12" data-rv>
@@ -192,31 +197,31 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[560px]" data-rv>
         <div class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
-          <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=900&q=80" alt="Jeu vidéo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80" alt="Centre de données" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
-            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Créé par un membre</span>
-            <h4 class="text-white font-bold text-lg leading-tight">Jeu vidéo</h4>
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Infrastructure</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Centre de données</h4>
           </div>
         </div>
         <div class="md:col-span-2 md:row-span-1 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
-          <img src="https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&w=900&q=80" alt="Robot maison" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=900&q=80" alt="Serveurs" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
-            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Atelier IA & électronique</span>
-            <h4 class="text-white font-bold text-lg leading-tight">Robot maison</h4>
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Stockage & réseau</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Serveurs</h4>
           </div>
         </div>
         <div class="md:col-span-1 md:row-span-1 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
-          <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=900&q=80" alt="Identité de marque" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80" alt="Réseau mondial" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
-            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Projet de design</span>
-            <h4 class="text-white font-bold text-lg leading-tight">Identité de marque</h4>
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Connecté partout</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Réseau mondial</h4>
           </div>
         </div>
         <div class="md:col-span-1 md:row-span-1 group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
-          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=900&q=80" alt="Court-métrage" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <img src="https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=900&q=80" alt="Cloud" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
-            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Montage & effets</span>
-            <h4 class="text-white font-bold text-lg leading-tight">Court-métrage</h4>
+            <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">Toujours en ligne</span>
+            <h4 class="text-white font-bold text-lg leading-tight">Cloud</h4>
           </div>
         </div>
     </div>
@@ -239,7 +244,7 @@
 <footer class="bg-surface-container-low border-t border-surface-variant/30 px-4 md:px-10 pt-16 pb-10 mt-8">
   <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-10">
     <div class="col-span-2">
-      <div class="flex items-center gap-2.5 mb-4"><div class="w-9 h-9 bg-gradient-to-br from-secondary to-tertiary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div><span class="text-xl font-bold text-on-background">DigitalMinds</span></div>
+      <div class="flex items-center gap-2.5 mb-4"><div class="w-9 h-9 bg-gradient-to-br from-secondary to-tertiary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div><span class="text-xl font-bold"><span class="text-primary">Nozay</span><span class="text-on-background">.DigitalMinds</span></span></div>
       <p class="text-sm text-on-surface-variant max-w-xs leading-relaxed">Pas une école traditionnelle. Un centre d'innovation flexible où les enfants et les adolescents explorent, créent et acquièrent des compétences d'avenir à leur propre rythme.</p>
     </div>
     <div>

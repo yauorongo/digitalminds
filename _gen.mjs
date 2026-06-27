@@ -62,11 +62,11 @@ const data = [
     why:"Pourquoi apprendre à collaborer et partager ses idées avec nous ?",
     topics:[
       ['Pitcher son Projet',"Présenter une idée en 2 minutes de manière claire, structurée et convaincante."],
-      ['Travail en Équipe',"Apprendre à se répartir les rôles, à donner et recevoir du feedback positif."],
+      ['Cours d\'Anglais — 100% Gratuit',"Des cours et ateliers d'anglais entièrement offerts : la langue universelle de la tech, du web et des jeux."],
       ['Communication Visuelle',"Créer slides, vidéos et infographies qui font passer un message en un coup d'œil."],
       ['Écoute Active',"Apprendre à comprendre vraiment ce que l'autre veut dire avant de répondre."],
-      ['Anglais Tech',"Acquérir le vocabulaire anglais utilisé dans la tech mondiale, naturellement, par la pratique."],
-      ['Gestion de Projet',"Découvrir les outils simples pour organiser un projet à plusieurs (Trello, Notion…)."],
+      ['Travail en Équipe',"Apprendre à se répartir les rôles, à donner et recevoir du feedback positif."],
+      ['Connexion Internationale',"Présenter ses projets en anglais et échanger avec des kids & teens d'autres pays."],
     ],
     bullets:["Gagner en confiance à l'oral comme à l'écrit","Savoir convaincre, défendre et négocier ses idées","Apprendre à travailler avec des profils différents","Préparer naturellement les oraux scolaires et entretiens futurs"] },
 
@@ -173,6 +173,9 @@ const head = (title, desc) => `<!DOCTYPE html>
   .bleed{width:80vw;margin-left:calc(50% - 40vw);margin-right:calc(50% - 40vw);}
   .blob-animate{animation:blob 18s infinite alternate cubic-bezier(.45,0,.55,1);}
   @keyframes blob{0%{transform:translate(0,0) scale(1) rotate(0)}100%{transform:translate(18px,-26px) scale(1.12) rotate(10deg)}}
+  .dm-wave{display:inline-block;transform-origin:72% 72%;animation:dmwave 2.6s ease-in-out infinite;}
+  @keyframes dmwave{0%,62%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%{transform:rotate(-8deg)}40%{transform:rotate(12deg)}50%{transform:rotate(-5deg)}}
+  @media (prefers-reduced-motion:reduce){.dm-wave{animation:none;}}
   [data-rv]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
   [data-rv].in{opacity:1;transform:none;}
   .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
@@ -184,7 +187,7 @@ const compNav = data.map(c=>`<a href="/competences/${c.slug}" class="block px-4 
 const nav = `<header class="fixed top-0 w-full flex justify-between items-center px-4 md:px-10 py-4 bg-white/70 backdrop-blur-xl border-b border-surface-variant/50 z-50">
   <a href="/" class="flex items-center gap-2.5">
     <div class="w-10 h-10 bg-gradient-to-br from-secondary to-tertiary rounded-xl flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div>
-    <h1 class="text-xl md:text-2xl font-bold text-on-background tracking-tight">DigitalMinds</h1>
+    <h1 class="text-xl md:text-2xl font-bold tracking-tight"><span class="text-primary">Nozay</span><span class="text-on-background">.DigitalMinds</span></h1>
   </a>
   <nav class="hidden md:flex gap-8 items-center">
     <a class="text-sm text-on-surface-variant hover:text-secondary transition-colors" href="/">Accueil</a>
@@ -216,7 +219,7 @@ const nav = `<header class="fixed top-0 w-full flex justify-between items-center
 const footer = `<footer class="bg-surface-container-low border-t border-surface-variant/30 px-4 md:px-10 pt-16 pb-10 mt-8">
   <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-10">
     <div class="col-span-2">
-      <div class="flex items-center gap-2.5 mb-4"><div class="w-9 h-9 bg-gradient-to-br from-secondary to-tertiary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div><span class="text-xl font-bold text-on-background">DigitalMinds</span></div>
+      <div class="flex items-center gap-2.5 mb-4"><div class="w-9 h-9 bg-gradient-to-br from-secondary to-tertiary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span></div><span class="text-xl font-bold"><span class="text-primary">Nozay</span><span class="text-on-background">.DigitalMinds</span></span></div>
       <p class="text-sm text-on-surface-variant max-w-xs leading-relaxed">Pas une école traditionnelle. Un centre d'innovation flexible où les enfants et les adolescents explorent, créent et acquièrent des compétences d'avenir à leur propre rythme.</p>
     </div>
     <div>
@@ -304,19 +307,71 @@ const media = {
   'pensee-creative':         { hero:'creative',   cards:['brainstorm','creative','design','learning','video_edit','teamwork'] },
   'intelligence-artificielle':{ hero:'robot',     cards:['robot','robotics','coding','data','kid_tech','teamwork'] },
   'programmation-technologie':{ hero:'coding',     cards:['coding','coding2','kid_tech','robotics','design','data'] },
-  'communication':           { hero:'teamwork',   cards:['teamwork','leadership','learning','study','brainstorm','video_edit'] },
+  'communication':           { hero:'teamwork',   cards:['teamwork','https://flagcdn.com/w1280/gb.png','learning','study','brainstorm','video_edit'] },
   'donnees-analyse':         { hero:'data',        cards:['data','data2','coding','study','learning','teamwork'] },
   'leadership':              { hero:'dc_aisle',    cards:['dc_hall','server_room','cloud_tech','coding','circuit','network_earth'] },
   'entrepreneuriat':         { hero:'entrepren',   cards:['entrepren','leadership','teamwork','design','data2','brainstorm'] },
   'creativite-digitale':     { hero:'design',      cards:['design','design2','video_edit','creative','kid_tech','robotics'] },
   'apprentissage-continu':   { hero:'learning',    cards:['learning','study','kid_tech','coding','teamwork','brainstorm'] },
 };
-const galleryItems = [
-  ['kid_tech','Jeu vidéo','Créé par un membre','md:col-span-2 md:row-span-2'],
-  ['robotics','Robot maison','Atelier IA & électronique','md:col-span-2 md:row-span-1'],
-  ['design2','Identité de marque','Projet de design','md:col-span-1 md:row-span-1'],
-  ['video_edit','Court-métrage','Montage & effets','md:col-span-1 md:row-span-1'],
-];
+// Bento spans (big, wide, small, small) + per-competence "réalisations" galleries
+const GSPANS = ['md:col-span-2 md:row-span-2','md:col-span-2 md:row-span-1','md:col-span-1 md:row-span-1','md:col-span-1 md:row-span-1'];
+const galleryByComp = {
+  'pensee-creative': [
+    ['1593305841991-05c297ba4575','Univers imaginé','Studio créatif'],
+    ['1620421680010-0766ff230392','Œuvre abstraite','Art génératif'],
+    ['1543286386-2e659306cd6c','Carte mentale','Idéation'],
+    ['1550745165-9bc0b252726f','Concept néon','Prototype'],
+  ],
+  'intelligence-artificielle': [
+    ['1677442136019-21780ecad995',"Modèle d'IA",'Entraîné par un membre'],
+    ['1535378917042-10a22c95931a','Robot assistant','IA embarquée'],
+    ['1531746790731-6c087fecd65a','Vision par IA','Reconnaissance'],
+    ['1593508512255-86ab42a8e620','Réalité virtuelle','Expérience immersive'],
+  ],
+  'programmation-technologie': [
+    ['1542751371-adc38448a05e','Jeu vidéo','Codé par un membre'],
+    ['1526374965328-7f61d4dc18c5','Code en action','Python & JS'],
+    ['1633356122544-f134324a6cee','Application web','Projet React'],
+    ['1511512578047-dfb367046420','Game design','Manette & contrôles'],
+  ],
+  'communication': [
+    ['1511671782779-c97d3d27a1d4','Podcast',"Émission d'un membre"],
+    ['1574717024653-61fd2cf4d44d','Montage vidéo','Capsule & tuto'],
+    ['1593305841991-05c297ba4575','Live & streaming','Présentation'],
+    ['1451187580459-43490279c0fa','Échange international',"Avec des jeunes d'autres pays"],
+  ],
+  'donnees-analyse': [
+    ['1460925895917-afdab827c52f','Tableau de bord','Données en direct'],
+    ['1543286386-2e659306cd6c','Visualisation','Graphiques'],
+    ['1526374965328-7f61d4dc18c5','Cybersécurité','Protéger les données'],
+    ['1542831371-29b0f74f9713','Analyse','Exploration'],
+  ],
+  'leadership': [
+    ['1558494949-ef010cbdcc31','Centre de données','Infrastructure'],
+    ['1544197150-b99a580bb7a8','Serveurs','Stockage & réseau'],
+    ['1451187580459-43490279c0fa','Réseau mondial','Connecté partout'],
+    ['1597733336794-12d05021d510','Cloud',"Toujours en ligne"],
+  ],
+  'entrepreneuriat': [
+    ['1454165804606-c3d57bc86b40','Lancement de projet','Mini-startup'],
+    ['1633356122544-f134324a6cee','Produit numérique','MVP'],
+    ['1574717024653-61fd2cf4d44d','Vidéo promo','Marketing'],
+    ['1550745165-9bc0b252726f','Identité visuelle','Marque & logo'],
+  ],
+  'creativite-digitale': [
+    ['1620421680010-0766ff230392','Art 3D','Rendu génératif'],
+    ['1598488035139-bdbb2231ce04','Création musicale','Studio son'],
+    ['1574717024653-61fd2cf4d44d','Montage vidéo','Court-métrage'],
+    ['1593508512255-86ab42a8e620','Monde virtuel','Univers 3D'],
+  ],
+  'apprentissage-continu': [
+    ['1593508512255-86ab42a8e620','Apprendre en VR','Immersion'],
+    ['1633356122544-f134324a6cee','Nouveaux langages','Auto-formation'],
+    ['1543286386-2e659306cd6c','Carnet de bord','Suivi des progrès'],
+    ['1677442136019-21780ecad995','Veille tech','Toujours à jour'],
+  ],
+};
 const heroFile = {
   'pensee-creative':'/videos/pensee-creative.webp',
   'intelligence-artificielle':'/videos/intelligence-artificielle.webp',
@@ -333,7 +388,7 @@ function buildCompetence(c) {
   const m = media[c.slug];
   const topics = c.topics.map(([t,d],i)=>`
         <article class="course-card rounded-xl overflow-hidden min-w-[280px] max-w-[300px] shrink-0 snap-start group">
-          <div class="h-44 overflow-hidden"><img src="${U(PIC[m.cards[i]])}" alt="${t}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
+          <div class="h-44 overflow-hidden"><img src="${m.cards[i].startsWith('http') ? m.cards[i] : U(PIC[m.cards[i]])}" alt="${t}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>
           <div class="p-6">
             <div class="text-${c.color} text-xs font-bold uppercase tracking-widest mb-2">Domaine ${String(i+1).padStart(2,'0')}</div>
             <h3 class="text-lg font-bold text-on-background mb-2">${t}</h3>
@@ -347,14 +402,46 @@ function buildCompetence(c) {
             <span class="text-on-surface-variant">${b}</span>
           </li>`).join('');
 
-  const gallery = galleryItems.map(([k,t,s,span])=>`
-        <div class="${span} group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
-          <img src="${U(PIC[k])}" alt="${t}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+  const gallery = (galleryByComp[c.slug] || []).map(([id,t,s],i)=>`
+        <div class="${GSPANS[i]} group relative overflow-hidden rounded-2xl cursor-pointer min-h-[200px]">
+          <img src="${U(id)}" alt="${t}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent flex flex-col justify-end p-5">
             <span class="text-white/75 text-[11px] font-bold uppercase tracking-widest">${s}</span>
             <h4 class="text-white font-bold text-lg leading-tight">${t}</h4>
           </div>
         </div>`).join('');
+
+  const englishSection = c.slug !== 'communication' ? '' : `
+  <!-- Free English highlight (communication only) -->
+  <section class="px-4 md:px-10 max-w-6xl mx-auto pb-4">
+    <div class="rounded-[2.5rem] overflow-hidden border border-surface-variant shadow-[0_24px_60px_-30px_rgba(15,23,42,.18)] grid md:grid-cols-2 bg-surface-container-low" data-rv>
+      <div class="p-8 md:p-12 flex flex-col justify-center">
+        <span class="self-start inline-flex items-center gap-1.5 bg-primary text-on-primary text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"><span class="material-symbols-outlined text-sm">language</span> 100% Gratuit · Inclus</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-on-background leading-tight">L'anglais, la langue du monde — <span class="text-primary">offert</span> à chaque membre.</h2>
+        <p class="text-on-surface-variant text-lg mt-4 leading-relaxed">L'anglais est la langue universelle de la tech, des jeux et d'Internet. Nos ateliers d'anglais sont <strong class="text-on-background">entièrement gratuits</strong> — parce que chaque ado mérite cet atout pour son avenir.</p>
+        <ul class="mt-6 space-y-3">
+          <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant"><strong class="text-on-background">Ateliers d'anglais gratuits</strong>, chaque semaine, à ton rythme.</span></li>
+          <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant"><strong class="text-on-background">Présenter ses projets en anglais</strong>, et gagner en confiance.</span></li>
+          <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-on-surface-variant"><strong class="text-on-background">Échanger avec des kids &amp; teens</strong> d'autres pays.</span></li>
+        </ul>
+      </div>
+      <div class="relative min-h-[300px] md:min-h-0 overflow-hidden bg-[#070b18]">
+        <div class="absolute inset-0" style="background:radial-gradient(115% 90% at 12% 8%, rgba(37,99,235,.55), transparent 58%), radial-gradient(100% 85% at 92% 95%, rgba(255,107,107,.40), transparent 55%), radial-gradient(85% 80% at 65% 45%, rgba(255,159,67,.22), transparent 60%);"></div>
+        <div class="absolute inset-0 opacity-[0.10]" style="background-image:radial-gradient(rgba(255,255,255,.85) 1px, transparent 1px);background-size:22px 22px;"></div>
+        <div class="relative h-full min-h-[300px] flex flex-col items-center justify-center text-center px-8 py-12">
+          <span class="font-mono text-[11px] sm:text-xs tracking-[0.2em] text-white/45 mb-5"><span class="text-tertiary">~/digitalminds</span> $ say-hi</span>
+          <h3 class="text-5xl sm:text-6xl font-extrabold leading-[1.02] text-white tracking-tight" style="text-shadow:0 0 22px rgba(120,170,255,.65),0 0 46px rgba(37,99,235,.5);">Hello,<br><span style="color:#a9c9ff;">World!</span> <span class="dm-wave">👋</span></h3>
+          <div class="mt-7 flex flex-wrap items-center justify-center gap-2">
+            <span class="px-3.5 py-1 rounded-full bg-white text-[#070b18] text-sm font-extrabold shadow-[0_0_18px_rgba(255,255,255,.35)]">Hello</span>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white/60 text-sm border border-white/15">Salut</span>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white/60 text-sm border border-white/15">Hola</span>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white/60 text-sm border border-white/15">Ciao</span>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-white/60 text-sm border border-white/15">你好</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
 
   return `${head(`${c.title} — DigitalMinds`, c.intro.slice(0,150))}
 <body class="overflow-x-hidden pb-10">
@@ -370,6 +457,7 @@ ${nav}
       <div><span class="inline-block px-4 py-1.5 rounded-full bg-${c.color}/10 text-${c.color} text-xs font-bold uppercase tracking-widest">${c.sub}</span></div>
       <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-on-background">${titleHtml(c)}</h1>
       <p class="text-lg text-on-surface-variant leading-relaxed max-w-lg">${c.intro}</p>
+      ${c.slug !== 'communication' ? '' : `<p class="max-w-lg inline-flex items-start gap-2.5 bg-primary/10 text-primary font-bold rounded-2xl px-5 py-3.5 leading-snug"><span class="material-symbols-outlined text-xl shrink-0" style="font-variation-settings:'FILL' 1;">language</span><span>Et oui — <span class="underline decoration-2 underline-offset-2">l'anglais est inclus, 100% gratuitement.</span> Cours, ateliers et conversation pour maîtriser la langue du monde de la tech.</span></p>`}
       <div class="flex flex-wrap gap-4 pt-2">
         <a href="/membership" class="bg-primary text-on-primary px-8 py-4 soft-pill font-bold shadow-md hover:shadow-xl active:scale-95">Devenir Membre</a>
         <a href="/#competences" class="bg-white border border-surface-variant text-on-background px-8 py-4 soft-pill font-bold hover:border-secondary transition-colors">Voir tous les domaines</a>
@@ -409,6 +497,7 @@ ${nav}
     </ul>
   </section>
 
+${englishSection}
   <!-- SHOWCASE -->
   <section class="px-4 md:px-10 max-w-6xl mx-auto pb-20 md:pb-28">
     <div class="text-center max-w-2xl mx-auto mb-12" data-rv>
